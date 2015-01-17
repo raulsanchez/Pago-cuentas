@@ -1,0 +1,5 @@
+[16-Jan-2015 01:10:35 America/Santiago] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/cra12733/public_html/cakephp/config/bootstrap.php on line 101
+[16-Jan-2015 19:45:17 UTC] PHP Fatal error:  Class 'Locale' not found in /home/cra12733/public_html/cakephp/vendor/cakephp/cakephp/src/I18n/I18n.php on line 235
+[16-Jan-2015 19:45:17 UTC] PHP Fatal error:  Class 'Locale' not found in /home/cra12733/public_html/cakephp/vendor/cakephp/cakephp/src/I18n/I18n.php on line 235
+[16-Jan-2015 20:38:05 UTC] PHP Parse error:  syntax error, unexpected 'print_f' (T_STRING) in /home/cra12733/public_html/cakephp/src/Controller/CuentasController.php on line 32
+[16-Jan-2015 20:38:23 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/cra12733/public_html/cakephp/src/Controller/CuentasController.php on line 32
