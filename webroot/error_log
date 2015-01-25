@@ -3,3 +3,25 @@
 [16-Jan-2015 19:45:17 UTC] PHP Fatal error:  Class 'Locale' not found in /home/cra12733/public_html/cakephp/vendor/cakephp/cakephp/src/I18n/I18n.php on line 235
 [16-Jan-2015 20:38:05 UTC] PHP Parse error:  syntax error, unexpected 'print_f' (T_STRING) in /home/cra12733/public_html/cakephp/src/Controller/CuentasController.php on line 32
 [16-Jan-2015 20:38:23 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/cra12733/public_html/cakephp/src/Controller/CuentasController.php on line 32
+[21-Jan-2015 18:45:57 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/AccountsController.php on line 14
+[21-Jan-2015 18:55:33 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 28
+[21-Jan-2015 18:55:55 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:55:58 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:56:30 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:56:31 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:56:32 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:56:33 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:57:28 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:57:30 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:58:04 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:58:06 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:58:07 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 26
+[21-Jan-2015 18:58:40 UTC] PHP Parse error:  syntax error, unexpected '$this' (T_VARIABLE) in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 16
+[21-Jan-2015 18:59:08 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 27
+[21-Jan-2015 19:03:07 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 27
+[21-Jan-2015 19:03:38 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 27
+[21-Jan-2015 19:03:39 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/cra12733/public_html/cakephp/src/Controller/ProductsController.php on line 27
+[21-Jan-2015 19:20:42 UTC] PHP Fatal error:  Class 'App\Model\Table\TableRegistry' not found in /home/cra12733/public_html/cakephp/src/Model/Table/ProductsTable.php on line 8
+[21-Jan-2015 19:20:53 UTC] PHP Fatal error:  Class 'App\Model\Table\TableRegistry' not found in /home/cra12733/public_html/cakephp/src/Model/Table/ProductsTable.php on line 4
+[21-Jan-2015 19:20:54 UTC] PHP Fatal error:  Class 'App\Model\Table\TableRegistry' not found in /home/cra12733/public_html/cakephp/src/Model/Table/ProductsTable.php on line 4
+[21-Jan-2015 19:21:00 UTC] PHP Fatal error:  Class 'App\Model\Table\TableRegistry' not found in /home/cra12733/public_html/cakephp/src/Model/Table/ProductsTable.php on line 7
