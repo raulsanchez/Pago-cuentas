@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Test\TestCase\View\Helper;
 
 use App\View\Helper\ExampleHelper;
@@ -6,13 +7,12 @@ use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
 /**
- * App\View\Helper\ExampleHelper Test Case
+ * App\View\Helper\ExampleHelper Test Case.
  */
-class ExampleHelperTest extends TestCase
+class testBakeHelperTest extends TestCase
 {
-
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
@@ -24,7 +24,7 @@ class ExampleHelperTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -36,7 +36,7 @@ class ExampleHelperTest extends TestCase
     }
 
     /**
-     * Test initial setup
+     * Test initial setup.
      *
      * @return void
      */

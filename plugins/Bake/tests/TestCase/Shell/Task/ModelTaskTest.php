@@ -1,17 +1,20 @@
 <?php
 /**
  * CakePHP : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Test\TestCase\Shell\Task;
 
 use Bake\Shell\Task\TemplateTask;
@@ -20,15 +23,14 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Model\Model;
 use Cake\ORM\TableRegistry;
-use Cake\Utility\ClassRegistry;
 
 /**
- * ModelTaskTest class
+ * ModelTaskTest class.
  */
 class ModelTaskTest extends TestCase
 {
     /**
-     * fixtures
+     * fixtures.
      *
      * Don't sort this list alphabetically - otherwise there are table constraints
      * which fail when using postgres
@@ -46,18 +48,18 @@ class ModelTaskTest extends TestCase
         'core.counter_cache_users',
         'core.counter_cache_posts',
         'core.tags',
-        'core.articles_tags'
+        'core.articles_tags',
     ];
 
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
     public function setUp()
     {
         parent::setUp();
-        $this->_compareBasePath = Plugin::path('Bake') . 'tests' . DS . 'comparisons' . DS . 'Model' . DS;
+        $this->_compareBasePath = Plugin::path('Bake').'tests'.DS.'comparisons'.DS.'Model'.DS;
         $io = $this->getMock('Cake\Console\ConsoleIo', [], [], '', false);
 
         $this->Task = $this->getMock(
@@ -88,7 +90,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * sets up the rest of the dependencies for Model Task
+     * sets up the rest of the dependencies for Model Task.
      *
      * @return void
      */
@@ -105,7 +107,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -117,7 +119,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Test that listAll uses the connection property
+     * Test that listAll uses the connection property.
      *
      * @return void
      */
@@ -185,21 +187,21 @@ class ModelTaskTest extends TestCase
         $assocs = [
             'belongsTo' => [
                 [
-                    'alias' => 'BakeUsers',
+                    'alias'      => 'BakeUsers',
                     'foreignKey' => 'bake_user_id',
                 ],
             ],
             'hasMany' => [
                 [
-                    'alias' => 'BakeComments',
+                    'alias'      => 'BakeComments',
                     'foreignKey' => 'bake_article_id',
                 ],
             ],
             'belongsToMany' => [
                 [
-                    'alias' => 'BakeTags',
-                    'foreignKey' => 'bake_article_id',
-                    'joinTable' => 'bake_articles_bake_tags',
+                    'alias'            => 'BakeTags',
+                    'foreignKey'       => 'bake_article_id',
+                    'joinTable'        => 'bake_articles_bake_tags',
                     'targetForeignKey' => 'bake_tag_id',
                 ],
             ],
@@ -214,7 +216,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Test applying associations does nothing on a concrete class
+     * Test applying associations does nothing on a concrete class.
      *
      * @return void
      */
@@ -225,21 +227,21 @@ class ModelTaskTest extends TestCase
         $assocs = [
             'belongsTo' => [
                 [
-                    'alias' => 'BakeUsers',
+                    'alias'      => 'BakeUsers',
                     'foreignKey' => 'bake_user_id',
                 ],
             ],
             'hasMany' => [
                 [
-                    'alias' => 'BakeComments',
+                    'alias'      => 'BakeComments',
                     'foreignKey' => 'bake_article_id',
                 ],
             ],
             'belongsToMany' => [
                 [
-                    'alias' => 'BakeTags',
-                    'foreignKey' => 'bake_article_id',
-                    'joinTable' => 'bake_articles_bake_tags',
+                    'alias'            => 'BakeTags',
+                    'foreignKey'       => 'bake_article_id',
+                    'joinTable'        => 'bake_articles_bake_tags',
                     'targetForeignKey' => 'bake_tag_id',
                 ],
             ],
@@ -251,7 +253,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Test getAssociations
+     * Test getAssociations.
      *
      * @return void
      */
@@ -262,21 +264,21 @@ class ModelTaskTest extends TestCase
         $expected = [
             'belongsTo' => [
                 [
-                    'alias' => 'BakeUsers',
-                    'foreignKey' => 'bake_user_id'
+                    'alias'      => 'BakeUsers',
+                    'foreignKey' => 'bake_user_id',
                 ],
             ],
             'hasMany' => [
                 [
-                    'alias' => 'BakeComments',
+                    'alias'      => 'BakeComments',
                     'foreignKey' => 'bake_article_id',
                 ],
             ],
             'belongsToMany' => [
                 [
-                    'alias' => 'BakeTags',
-                    'foreignKey' => 'bake_article_id',
-                    'joinTable' => 'bake_articles_bake_tags',
+                    'alias'            => 'BakeTags',
+                    'foreignKey'       => 'bake_article_id',
+                    'joinTable'        => 'bake_articles_bake_tags',
                     'targetForeignKey' => 'bake_tag_id',
                 ],
             ],
@@ -285,7 +287,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Test getAssociations in a plugin
+     * Test getAssociations in a plugin.
      *
      * @return void
      */
@@ -298,24 +300,24 @@ class ModelTaskTest extends TestCase
         $expected = [
             'belongsTo' => [
                 [
-                    'alias' => 'BakeUsers',
-                    'className' => 'TestBake.BakeUsers',
-                    'foreignKey' => 'bake_user_id'
+                    'alias'      => 'BakeUsers',
+                    'className'  => 'TestBake.BakeUsers',
+                    'foreignKey' => 'bake_user_id',
                 ],
             ],
             'hasMany' => [
                 [
-                    'alias' => 'BakeComments',
-                    'className' => 'TestBake.BakeComments',
+                    'alias'      => 'BakeComments',
+                    'className'  => 'TestBake.BakeComments',
                     'foreignKey' => 'bake_article_id',
                 ],
             ],
             'belongsToMany' => [
                 [
-                    'alias' => 'BakeTags',
-                    'className' => 'TestBake.BakeTags',
-                    'foreignKey' => 'bake_article_id',
-                    'joinTable' => 'bake_articles_bake_tags',
+                    'alias'            => 'BakeTags',
+                    'className'        => 'TestBake.BakeTags',
+                    'foreignKey'       => 'bake_article_id',
+                    'joinTable'        => 'bake_articles_bake_tags',
                     'targetForeignKey' => 'bake_tag_id',
                 ],
             ],
@@ -335,14 +337,14 @@ class ModelTaskTest extends TestCase
         $expected = [
             'belongsTo' => [
                 [
-                    'alias' => 'BakeArticles',
-                    'foreignKey' => 'bake_article_id'
+                    'alias'      => 'BakeArticles',
+                    'foreignKey' => 'bake_article_id',
                 ],
                 [
-                    'alias' => 'BakeUsers',
-                    'foreignKey' => 'bake_user_id'
+                    'alias'      => 'BakeUsers',
+                    'foreignKey' => 'bake_user_id',
                 ],
-            ]
+            ],
         ];
         $this->assertEquals($expected, $result);
 
@@ -351,11 +353,11 @@ class ModelTaskTest extends TestCase
         $expected = [
             'belongsTo' => [
                 [
-                    'alias' => 'ParentCategoryThreads',
-                    'className' => 'CategoryThreads',
-                    'foreignKey' => 'parent_id'
+                    'alias'      => 'ParentCategoryThreads',
+                    'className'  => 'CategoryThreads',
+                    'foreignKey' => 'parent_id',
                 ],
-            ]
+            ],
         ];
         $this->assertEquals($expected, $result);
 
@@ -364,18 +366,18 @@ class ModelTaskTest extends TestCase
         $expected = [
             'belongsTo' => [
                 [
-                    'alias' => 'ParentCategoryThreads',
-                    'className' => 'Blog.CategoryThreads',
-                    'foreignKey' => 'parent_id'
+                    'alias'      => 'ParentCategoryThreads',
+                    'className'  => 'Blog.CategoryThreads',
+                    'foreignKey' => 'parent_id',
                 ],
-            ]
+            ],
         ];
         $this->assertEquals($expected, $result);
     }
 
     /**
      * Test that belongsTo generation works for models with composite
-     * primary keys
+     * primary keys.
      *
      * @return void
      */
@@ -386,20 +388,20 @@ class ModelTaskTest extends TestCase
         $expected = [
             'belongsTo' => [
                 [
-                    'alias' => 'Articles',
-                    'foreignKey' => 'article_id'
+                    'alias'      => 'Articles',
+                    'foreignKey' => 'article_id',
                 ],
                 [
-                    'alias' => 'Tags',
-                    'foreignKey' => 'tag_id'
-                ]
-            ]
+                    'alias'      => 'Tags',
+                    'foreignKey' => 'tag_id',
+                ],
+            ],
         ];
         $this->assertEquals($expected, $result);
     }
 
     /**
-     * Test that belongsTo generation ignores _id mid-column
+     * Test that belongsTo generation ignores _id mid-column.
      *
      * @return void
      */
@@ -407,7 +409,7 @@ class ModelTaskTest extends TestCase
     {
         $model = TableRegistry::get('Articles');
         $model->schema([
-            'id' => ['type' => 'integer'],
+            'id'             => ['type' => 'integer'],
             'thing_id_field' => ['type' => 'integer'],
         ]);
         $result = $this->Task->findBelongsTo($model, []);
@@ -427,7 +429,7 @@ class ModelTaskTest extends TestCase
         $expected = [
             'hasMany' => [
                 [
-                    'alias' => 'BakeComments',
+                    'alias'      => 'BakeComments',
                     'foreignKey' => 'bake_article_id',
                 ],
             ],
@@ -439,11 +441,11 @@ class ModelTaskTest extends TestCase
         $expected = [
             'hasMany' => [
                 [
-                    'alias' => 'ChildCategoryThreads',
-                    'className' => 'CategoryThreads',
+                    'alias'      => 'ChildCategoryThreads',
+                    'className'  => 'CategoryThreads',
                     'foreignKey' => 'parent_id',
                 ],
-            ]
+            ],
         ];
         $this->assertEquals($expected, $result);
 
@@ -452,17 +454,17 @@ class ModelTaskTest extends TestCase
         $expected = [
             'hasMany' => [
                 [
-                    'alias' => 'ChildCategoryThreads',
-                    'className' => 'Blog.CategoryThreads',
-                    'foreignKey' => 'parent_id'
+                    'alias'      => 'ChildCategoryThreads',
+                    'className'  => 'Blog.CategoryThreads',
+                    'foreignKey' => 'parent_id',
                 ],
-            ]
+            ],
         ];
         $this->assertEquals($expected, $result);
     }
 
     /**
-     * Test that HABTM generation works
+     * Test that HABTM generation works.
      *
      * @return void
      */
@@ -474,9 +476,9 @@ class ModelTaskTest extends TestCase
         $expected = [
             'belongsToMany' => [
                 [
-                    'alias' => 'BakeTags',
-                    'foreignKey' => 'bake_article_id',
-                    'joinTable' => 'bake_articles_bake_tags',
+                    'alias'            => 'BakeTags',
+                    'foreignKey'       => 'bake_article_id',
+                    'joinTable'        => 'bake_articles_bake_tags',
                     'targetForeignKey' => 'bake_tag_id',
                 ],
             ],
@@ -521,7 +523,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Test getting field with the no- option
+     * Test getting field with the no- option.
      *
      * @return void
      */
@@ -534,7 +536,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Test getting field with a whitelist
+     * Test getting field with a whitelist.
      *
      * @return void
      */
@@ -568,7 +570,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Test getting hidden field with the no- option
+     * Test getting hidden field with the no- option.
      *
      * @return void
      */
@@ -581,7 +583,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Test getting hidden field with a whitelist
+     * Test getting hidden field with a whitelist.
      *
      * @return void
      */
@@ -600,7 +602,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Test getting primary key
+     * Test getting primary key.
      *
      * @return void
      */
@@ -641,10 +643,10 @@ class ModelTaskTest extends TestCase
         $result = $this->Task->getValidation($model);
         $expected = [
             'bake_user_id' => ['valid' => ['rule' => 'numeric', 'allowEmpty' => false]],
-            'title' => ['valid' => ['rule' => false, 'allowEmpty' => false]],
-            'body' => ['valid' => ['rule' => false, 'allowEmpty' => true]],
-            'published' => ['valid' => ['rule' => 'boolean', 'allowEmpty' => true]],
-            'id' => ['valid' => ['rule' => 'numeric', 'allowEmpty' => 'create']]
+            'title'        => ['valid' => ['rule' => false, 'allowEmpty' => false]],
+            'body'         => ['valid' => ['rule' => false, 'allowEmpty' => true]],
+            'published'    => ['valid' => ['rule' => 'boolean', 'allowEmpty' => true]],
+            'id'           => ['valid' => ['rule' => 'numeric', 'allowEmpty' => 'create']],
         ];
         $this->assertEquals($expected, $result);
 
@@ -652,10 +654,10 @@ class ModelTaskTest extends TestCase
         $result = $this->Task->getValidation($model);
         $expected = [
             'bake_article_id' => ['valid' => ['rule' => 'numeric', 'allowEmpty' => false]],
-            'bake_user_id' => ['valid' => ['rule' => 'numeric', 'allowEmpty' => false]],
-            'comment' => ['valid' => ['rule' => false, 'allowEmpty' => true]],
-            'published' => ['valid' => ['rule' => false, 'allowEmpty' => true]],
-            'otherid' => ['valid' => ['rule' => 'numeric', 'allowEmpty' => 'create']]
+            'bake_user_id'    => ['valid' => ['rule' => 'numeric', 'allowEmpty' => false]],
+            'comment'         => ['valid' => ['rule' => false, 'allowEmpty' => true]],
+            'published'       => ['valid' => ['rule' => false, 'allowEmpty' => true]],
+            'otherid'         => ['valid' => ['rule' => 'numeric', 'allowEmpty' => 'create']],
         ];
         $this->assertEquals($expected, $result);
     }
@@ -674,7 +676,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Tests the getRules method
+     * Tests the getRules method.
      *
      * @return void
      */
@@ -684,40 +686,40 @@ class ModelTaskTest extends TestCase
         $associations = [
             'belongsTo' => [
                 [
-                    'alias' => 'Countries',
-                    'foreignKey' => 'country_id'
+                    'alias'      => 'Countries',
+                    'foreignKey' => 'country_id',
                 ],
                 [
-                    'alias' => 'Sites',
-                    'foreignKey' => 'site_id'
-                ]
+                    'alias'      => 'Sites',
+                    'foreignKey' => 'site_id',
+                ],
             ],
             'hasMany' => [
                 [
-                    'alias' => 'BakeComments',
+                    'alias'      => 'BakeComments',
                     'foreignKey' => 'bake_user_id',
                 ],
-            ]
+            ],
         ];
         $result = $this->Task->getRules($model, $associations);
         $expected = [
             'username' => [
-                'name' => 'isUnique'
+                'name' => 'isUnique',
             ],
             'country_id' => [
-                'name' => 'existsIn',
-                'extra' => 'Countries'
+                'name'  => 'existsIn',
+                'extra' => 'Countries',
             ],
             'site_id' => [
-                'name' => 'existsIn',
-                'extra' => 'Sites'
-            ]
+                'name'  => 'existsIn',
+                'extra' => 'Sites',
+            ],
         ];
         $this->assertEquals($expected, $result);
     }
 
     /**
-     * test non interactive doActsAs
+     * test non interactive doActsAs.
      *
      * @return void
      */
@@ -733,14 +735,14 @@ class ModelTaskTest extends TestCase
 
         TableRegistry::clear();
         TableRegistry::get('Users', [
-            'table' => 'counter_cache_users'
+            'table' => 'counter_cache_users',
         ]);
         $model = TableRegistry::get('Posts', [
-            'table' => 'counter_cache_posts'
+            'table' => 'counter_cache_posts',
         ]);
         $result = $this->Task->getBehaviors($model);
         $expected = [
-            'CounterCache' => ["'Users' => ['post_count']"]
+            'CounterCache' => ["'Users' => ['post_count']"],
         ];
         $this->assertEquals($expected, $result);
     }
@@ -780,7 +782,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * Ensure that the fixture baking can be disabled
+     * Ensure that the fixture baking can be disabled.
      *
      * @return void
      */
@@ -826,7 +828,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * test baking validation
+     * test baking validation.
      *
      * @return void
      */
@@ -836,51 +838,51 @@ class ModelTaskTest extends TestCase
             'id' => [
                 'valid' => [
                     'allowEmpty' => 'create',
-                    'rule' => 'numeric',
-                ]
+                    'rule'       => 'numeric',
+                ],
             ],
             'name' => [
                 'valid' => [
                     'allowEmpty' => false,
-                    'rule' => false,
-                ]
+                    'rule'       => false,
+                ],
             ],
             'email' => [
                 'valid' => [
                     'allowEmpty' => true,
-                    'rule' => 'email'
+                    'rule'       => 'email',
                 ],
                 'unique' => [
-                    'rule' => 'validateUnique',
-                    'provider' => 'table'
-                ]
-            ]
+                    'rule'     => 'validateUnique',
+                    'provider' => 'table',
+                ],
+            ],
         ];
         $model = TableRegistry::get('BakeArticles');
         $result = $this->Task->bakeTable($model, compact('validation'));
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking
+     * test baking.
      *
      * @return void
      */
     public function testBakeTableConfig()
     {
         $config = [
-            'table' => 'articles',
-            'primaryKey' => ['id'],
+            'table'        => 'articles',
+            'primaryKey'   => ['id'],
             'displayField' => 'title',
-            'behaviors' => ['Timestamp' => ''],
+            'behaviors'    => ['Timestamp' => ''],
         ];
         $model = TableRegistry::get('BakeArticles');
         $result = $this->Task->bakeTable($model, $config);
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking relations
+     * test baking relations.
      *
      * @return void
      */
@@ -889,62 +891,62 @@ class ModelTaskTest extends TestCase
         $associations = [
             'belongsTo' => [
                 [
-                    'alias' => 'SomethingElse',
+                    'alias'      => 'SomethingElse',
                     'foreignKey' => 'something_else_id',
                 ],
                 [
-                    'alias' => 'BakeUser',
+                    'alias'      => 'BakeUser',
                     'foreignKey' => 'bake_user_id',
                 ],
             ],
             'hasMany' => [
                 [
-                    'alias' => 'BakeComment',
+                    'alias'      => 'BakeComment',
                     'foreignKey' => 'parent_id',
                 ],
             ],
             'belongsToMany' => [
                 [
-                    'alias' => 'BakeTag',
-                    'foreignKey' => 'bake_article_id',
-                    'joinTable' => 'bake_articles_bake_tags',
+                    'alias'            => 'BakeTag',
+                    'foreignKey'       => 'bake_article_id',
+                    'joinTable'        => 'bake_articles_bake_tags',
                     'targetForeignKey' => 'bake_tag_id',
                 ],
-            ]
+            ],
         ];
         $model = TableRegistry::get('BakeArticles');
         $result = $this->Task->bakeTable($model, compact('associations'));
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking an entity class
+     * test baking an entity class.
      *
      * @return void
      */
     public function testBakeEntity()
     {
         $config = [
-            'fields' => []
+            'fields' => [],
         ];
         $model = TableRegistry::get('BakeArticles');
         $result = $this->Task->bakeEntity($model, $config);
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking an entity class
+     * test baking an entity class.
      *
      * @return void
      */
     public function testBakeEntityFields()
     {
         $config = [
-            'fields' => ['title', 'body', 'published']
+            'fields' => ['title', 'body', 'published'],
         ];
         $model = TableRegistry::get('BakeArticles');
         $result = $this->Task->bakeEntity($model, $config);
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
@@ -959,11 +961,11 @@ class ModelTaskTest extends TestCase
             'hidden' => ['password'],
         ];
         $result = $this->Task->bakeEntity($model, $config);
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test bake() with a -plugin param
+     * test bake() with a -plugin param.
      *
      * @return void
      */
@@ -972,18 +974,18 @@ class ModelTaskTest extends TestCase
         $this->Task->plugin = 'ModelTest';
 
         // fake plugin path
-        Plugin::load('ModelTest', ['path' => APP . 'Plugin' . DS . 'ModelTest' . DS]);
-        $path = $this->_normalizePath(APP . 'Plugin/ModelTest/src/Model/Table/BakeArticlesTable.php');
+        Plugin::load('ModelTest', ['path' => APP.'Plugin'.DS.'ModelTest'.DS]);
+        $path = $this->_normalizePath(APP.'Plugin/ModelTest/src/Model/Table/BakeArticlesTable.php');
         $this->Task->expects($this->once())->method('createFile')
             ->with($path);
 
         $model = TableRegistry::get('BakeArticles');
         $result = $this->Task->bakeTable($model);
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test bake() with a -plugin param
+     * test bake() with a -plugin param.
      *
      * @return void
      */
@@ -992,19 +994,19 @@ class ModelTaskTest extends TestCase
         $this->Task->plugin = 'ModelTest';
 
         // fake plugin path
-        Plugin::load('ModelTest', ['path' => APP . 'Plugin' . DS . 'ModelTest' . DS]);
-        $path = APP . 'Plugin' . DS . 'ModelTest' . DS . 'src' . DS . 'Model' . DS . 'Entity' . DS . 'BakeArticle.php';
+        Plugin::load('ModelTest', ['path' => APP.'Plugin'.DS.'ModelTest'.DS]);
+        $path = APP.'Plugin'.DS.'ModelTest'.DS.'src'.DS.'Model'.DS.'Entity'.DS.'BakeArticle.php';
         $path = $this->_normalizePath($path);
         $this->Task->expects($this->once())->method('createFile')
             ->with($path);
 
         $model = TableRegistry::get('BakeArticles');
         $result = $this->Task->bakeEntity($model);
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * Tests baking a table with rules
+     * Tests baking a table with rules.
      *
      * @return void
      */
@@ -1014,28 +1016,28 @@ class ModelTaskTest extends TestCase
         $associations = [
             'belongsTo' => [
                 [
-                    'alias' => 'Countries',
-                    'foreignKey' => 'country_id'
+                    'alias'      => 'Countries',
+                    'foreignKey' => 'country_id',
                 ],
                 [
-                    'alias' => 'Sites',
-                    'foreignKey' => 'site_id'
-                ]
+                    'alias'      => 'Sites',
+                    'foreignKey' => 'site_id',
+                ],
             ],
             'hasMany' => [
                 [
-                    'alias' => 'BakeComments',
+                    'alias'      => 'BakeComments',
                     'foreignKey' => 'bake_user_id',
                 ],
-            ]
+            ],
         ];
         $rulesChecker = $this->Task->getRules($model, $associations);
         $result = $this->Task->bakeTable($model, compact('rulesChecker'));
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test that execute with no args
+     * test that execute with no args.
      *
      * @return void
      */
@@ -1061,12 +1063,12 @@ class ModelTaskTest extends TestCase
     {
         $this->Task->connection = 'test';
 
-        $tableFile = $this->_normalizePath(APP . 'Model/Table/BakeArticlesTable.php');
+        $tableFile = $this->_normalizePath(APP.'Model/Table/BakeArticlesTable.php');
         $this->Task->expects($this->at(0))
             ->method('createFile')
             ->with($tableFile, $this->stringContains('class BakeArticlesTable extends Table'));
 
-        $entityFile = $this->_normalizePath(APP . 'Model/Entity/BakeArticle.php');
+        $entityFile = $this->_normalizePath(APP.'Model/Entity/BakeArticle.php');
         $this->Task->expects($this->at(1))
             ->method('createFile')
             ->with($entityFile, $this->stringContains('class BakeArticle extends Entity'));
@@ -1075,14 +1077,14 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * data provider for testMainWithNamedModelVariations
+     * data provider for testMainWithNamedModelVariations.
      *
      * @return void
      */
     public static function nameVariations()
     {
         return [
-            ['BakeArticles'], ['bake_articles']
+            ['BakeArticles'], ['bake_articles'],
         ];
     }
 
@@ -1090,13 +1092,14 @@ class ModelTaskTest extends TestCase
      * test that execute passes with different inflections of the same name.
      *
      * @dataProvider nameVariations
+     *
      * @return void
      */
     public function testMainWithNamedModelVariations($name)
     {
         $this->Task->connection = 'test';
 
-        $filename = $this->_normalizePath(APP . 'Model/Table/BakeArticlesTable.php');
+        $filename = $this->_normalizePath(APP.'Model/Table/BakeArticlesTable.php');
 
         $this->Task->expects($this->at(0))
             ->method('createFile')
@@ -1105,7 +1108,7 @@ class ModelTaskTest extends TestCase
     }
 
     /**
-     * test that execute runs all() when args[0] = all
+     * test that execute runs all() when args[0] = all.
      *
      * @return void
      */
@@ -1123,62 +1126,62 @@ class ModelTaskTest extends TestCase
         $this->Task->Test->expects($this->exactly($count))
             ->method('bake');
 
-        $filename = $this->_normalizePath(APP . 'Model/Table/ArticlesTagsTable.php');
+        $filename = $this->_normalizePath(APP.'Model/Table/ArticlesTagsTable.php');
         $this->Task->expects($this->at(1))
             ->method('createFile')
             ->with($filename, $this->stringContains('class ArticlesTagsTable extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/ArticlesTag.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/ArticlesTag.php');
         $this->Task->expects($this->at(2))
             ->method('createFile')
             ->with($filename, $this->stringContains('class ArticlesTag extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Table/BakeArticlesTable.php');
+        $filename = $this->_normalizePath(APP.'Model/Table/BakeArticlesTable.php');
         $this->Task->expects($this->at(3))
             ->method('createFile')
             ->with($filename, $this->stringContains('class BakeArticlesTable extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/BakeArticle.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/BakeArticle.php');
         $this->Task->expects($this->at(4))
             ->method('createFile')
             ->with($filename, $this->stringContains('class BakeArticle extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Table/BakeArticlesBakeTagsTable.php');
+        $filename = $this->_normalizePath(APP.'Model/Table/BakeArticlesBakeTagsTable.php');
         $this->Task->expects($this->at(5))
             ->method('createFile')
             ->with($filename, $this->stringContains('class BakeArticlesBakeTagsTable extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/BakeArticlesBakeTag.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/BakeArticlesBakeTag.php');
         $this->Task->expects($this->at(6))
             ->method('createFile')
             ->with($filename, $this->stringContains('class BakeArticlesBakeTag extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Table/BakeCommentsTable.php');
+        $filename = $this->_normalizePath(APP.'Model/Table/BakeCommentsTable.php');
         $this->Task->expects($this->at(7))
             ->method('createFile')
             ->with($filename, $this->stringContains('class BakeCommentsTable extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/BakeComment.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/BakeComment.php');
         $this->Task->expects($this->at(8))
             ->method('createFile')
             ->with($filename, $this->stringContains('class BakeComment extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Table/BakeTagsTable.php');
+        $filename = $this->_normalizePath(APP.'Model/Table/BakeTagsTable.php');
         $this->Task->expects($this->at(9))
             ->method('createFile')
             ->with($filename, $this->stringContains('class BakeTagsTable extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/BakeTag.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/BakeTag.php');
         $this->Task->expects($this->at(10))
             ->method('createFile')
             ->with($filename, $this->stringContains('class BakeTag extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Table/CategoryThreadsTable.php');
+        $filename = $this->_normalizePath(APP.'Model/Table/CategoryThreadsTable.php');
         $this->Task->expects($this->at(11))
             ->method('createFile')
             ->with($filename, $this->stringContains('class CategoryThreadsTable extends'));
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/CategoryThread.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/CategoryThread.php');
         $this->Task->expects($this->at(12))
             ->method('createFile')
             ->with($filename, $this->stringContains('class CategoryThread extends'));
@@ -1206,32 +1209,32 @@ class ModelTaskTest extends TestCase
         $this->Task->Test->expects($this->exactly(8))
             ->method('bake');
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/BakeArticle.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/BakeArticle.php');
         $this->Task->expects($this->at(1))
             ->method('createFile')
             ->with($filename);
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/BakeArticlesBakeTag.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/BakeArticlesBakeTag.php');
         $this->Task->expects($this->at(3))
             ->method('createFile')
             ->with($filename);
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/BakeComment.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/BakeComment.php');
         $this->Task->expects($this->at(5))
             ->method('createFile')
             ->with($filename);
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/CategoryThread.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/CategoryThread.php');
         $this->Task->expects($this->at(7))
             ->method('createFile')
             ->with($filename);
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/CounterCacheUser.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/CounterCacheUser.php');
         $this->Task->expects($this->at(9))
             ->method('createFile')
             ->with($filename);
 
-        $filename = $this->_normalizePath(APP . 'Model/Entity/NumberTree.php');
+        $filename = $this->_normalizePath(APP.'Model/Entity/NumberTree.php');
         $this->Task->expects($this->at(11))
             ->method('createFile')
             ->with($filename);

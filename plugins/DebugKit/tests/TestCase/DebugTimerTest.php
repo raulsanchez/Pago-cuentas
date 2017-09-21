@@ -1,16 +1,19 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         debug_kit 2.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Test\TestCase;
 
 use Cake\Error\Debugger;
@@ -18,13 +21,12 @@ use Cake\TestSuite\TestCase;
 use DebugKit\DebugTimer;
 
 /**
- * DebugTimerTest
+ * DebugTimerTest.
  */
 class DebugTimerTest extends TestCase
 {
-
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -34,7 +36,7 @@ class DebugTimerTest extends TestCase
     }
 
     /**
-     * Start Timer test
+     * Start Timer test.
      *
      * @return void
      */
@@ -50,7 +52,7 @@ class DebugTimerTest extends TestCase
         sleep(1);
         $this->assertTrue(DebugTimer::stop('test2'));
         $elapsed = DebugTimer::elapsedTime('test2');
-        $expected = stripos(PHP_OS, 'win') === false ? 0.999: 0.95; // Windows timer's precision is bad
+        $expected = stripos(PHP_OS, 'win') === false ? 0.999 : 0.95; // Windows timer's precision is bad
         $this->assertTrue($elapsed >= $expected);
 
         DebugTimer::start('test3');
@@ -76,7 +78,7 @@ class DebugTimerTest extends TestCase
         $lineNo = __LINE__ - 8;
 
         $file = Debugger::trimPath(__FILE__);
-        $expected = $file . ' line ' . $lineNo;
+        $expected = $file.' line '.$lineNo;
         $this->assertEquals($expected, $key);
 
         $timer = $timers[$expected];
@@ -104,11 +106,11 @@ class DebugTimerTest extends TestCase
         $secondTimerLine = __LINE__ - 8;
         $file = Debugger::trimPath(__FILE__);
 
-        $this->assertTrue(isset($timers[$file . ' line ' . $firstTimerLine]), 'first timer is not set %s');
-        $this->assertTrue(isset($timers[$file . ' line ' . $secondTimerLine]), 'second timer is not set %s');
+        $this->assertTrue(isset($timers[$file.' line '.$firstTimerLine]), 'first timer is not set %s');
+        $this->assertTrue(isset($timers[$file.' line '.$secondTimerLine]), 'second timer is not set %s');
 
-        $firstTimer = $timers[$file . ' line ' . $firstTimerLine];
-        $secondTimer = $timers[$file . ' line ' . $secondTimerLine];
+        $firstTimer = $timers[$file.' line '.$firstTimerLine];
+        $secondTimer = $timers[$file.' line '.$secondTimerLine];
         $this->assertTrue($firstTimer['time'] > $secondTimer['time']);
     }
 
@@ -140,7 +142,7 @@ class DebugTimerTest extends TestCase
     }
 
     /**
-     * testRequestTime
+     * testRequestTime.
      *
      * @return void
      */

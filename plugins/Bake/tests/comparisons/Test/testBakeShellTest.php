@@ -1,17 +1,17 @@
 <?php
+
 namespace App\Test\TestCase\Shell;
 
 use App\Shell\ArticlesShell;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Shell\ArticlesShell Test Case
+ * App\Shell\ArticlesShell Test Case.
  */
-class ArticlesShellTest extends TestCase
+class testBakeShellTest extends TestCase
 {
-
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
@@ -23,7 +23,7 @@ class ArticlesShellTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -35,7 +35,7 @@ class ArticlesShellTest extends TestCase
     }
 
     /**
-     * Test initial setup
+     * Test initial setup.
      *
      * @return void
      */

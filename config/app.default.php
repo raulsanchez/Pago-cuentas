@@ -1,6 +1,7 @@
 <?php
+
 $config = [
-/**
+/*
  * Debug Level:
  *
  * Production Mode:
@@ -11,7 +12,7 @@ $config = [
  */
     'debug' => true,
 
-/**
+/*
  * Configure basic information about the application.
  *
  * - namespace - The namespace to find app classes under.
@@ -36,24 +37,24 @@ $config = [
  */
     'App' => [
         'namespace' => 'App',
-        'encoding' => 'UTF-8',
-        'base' => false,
-        'dir' => 'src',
-        'webroot' => 'webroot',
-        'wwwRoot' => WWW_ROOT,
+        'encoding'  => 'UTF-8',
+        'base'      => false,
+        'dir'       => 'src',
+        'webroot'   => 'webroot',
+        'wwwRoot'   => WWW_ROOT,
         // 'baseUrl' => env('SCRIPT_NAME'),
-        'fullBaseUrl' => false,
+        'fullBaseUrl'  => false,
         'imageBaseUrl' => 'img/',
-        'cssBaseUrl' => 'css/',
-        'jsBaseUrl' => 'js/',
-        'paths' => [
-            'plugins' => [ROOT . DS . 'plugins' . DS],
-            'templates' => [APP . 'Template' . DS],
-            'locales' => [APP . 'Locale' . DS],
+        'cssBaseUrl'   => 'css/',
+        'jsBaseUrl'    => 'js/',
+        'paths'        => [
+            'plugins'   => [ROOT.DS.'plugins'.DS],
+            'templates' => [APP.'Template'.DS],
+            'locales'   => [APP.'Locale'.DS],
         ],
     ],
 
-/**
+/*
  * Security and encryption configuration
  *
  * - salt - A random string used in security hashing methods.
@@ -64,7 +65,7 @@ $config = [
         'salt' => '__SALT__',
     ],
 
-/**
+/*
  * Apply timestamps with the last modified time to static assets (js, css, images).
  * Will append a querystring parameter containing the time the file was modified.
  * This is useful for busting browser caches.
@@ -76,43 +77,43 @@ $config = [
         // 'timestamp' => true,
     ],
 
-/**
+/*
  * Configure the cache adapters.
  */
     'Cache' => [
         'default' => [
             'className' => 'File',
-            'path' => CACHE,
+            'path'      => CACHE,
         ],
 
-    /**
+    /*
      * Configure the cache used for general framework caching. Path information,
      * object listings, and translation cache files are stored with this
      * configuration.
      */
         '_cake_core_' => [
             'className' => 'File',
-            'prefix' => 'myapp_cake_core_',
-            'path' => CACHE . 'persistent/',
+            'prefix'    => 'myapp_cake_core_',
+            'path'      => CACHE.'persistent/',
             'serialize' => true,
-            'duration' => '+2 minutes',
+            'duration'  => '+2 minutes',
         ],
 
-    /**
+    /*
      * Configure the cache for model and datasource caches. This cache
      * configuration is used to store schema descriptions, and table listings
      * in connections.
      */
         '_cake_model_' => [
             'className' => 'File',
-            'prefix' => 'myapp_cake_model_',
-            'path' => CACHE . 'models/',
+            'prefix'    => 'myapp_cake_model_',
+            'path'      => CACHE.'models/',
             'serialize' => true,
-            'duration' => '+2 minutes',
+            'duration'  => '+2 minutes',
         ],
     ],
 
-/**
+/*
  * Configure the Error and Exception handlers used by your application.
  *
  * By default errors are displayed using Debugger, when debug is true and logged
@@ -138,14 +139,14 @@ $config = [
  *   E.g.: `'skipLog' => ['Cake\Network\Exception\NotFoundException', 'Cake\Network\Exception\UnauthorizedException']`
  */
     'Error' => [
-        'errorLevel' => E_ALL & ~E_DEPRECATED,
+        'errorLevel'        => E_ALL & ~E_DEPRECATED,
         'exceptionRenderer' => 'Cake\Error\ExceptionRenderer',
-        'skipLog' => [],
-        'log' => true,
-        'trace' => true,
+        'skipLog'           => [],
+        'log'               => true,
+        'trace'             => true,
     ],
 
-/**
+/*
  * Email configuration.
  *
  * You can configure email transports and email delivery profiles here.
@@ -180,26 +181,26 @@ $config = [
         'default' => [
             'className' => 'Mail',
             // The following keys are used in SMTP transports
-            'host' => 'localhost',
-            'port' => 25,
-            'timeout' => 30,
+            'host'     => 'localhost',
+            'port'     => 25,
+            'timeout'  => 30,
             'username' => 'user',
             'password' => 'secret',
-            'client' => null,
-            'tls' => null,
+            'client'   => null,
+            'tls'      => null,
         ],
     ],
 
     'Email' => [
         'default' => [
             'transport' => 'default',
-            'from' => 'you@localhost',
+            'from'      => 'you@localhost',
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],
     ],
 
-/**
+/*
  * Connection information used by the ORM to connect
  * to your application's datastores.
  * Drivers include Mysql Postgres Sqlite Sqlserver
@@ -207,21 +208,21 @@ $config = [
  */
     'Datasources' => [
         'default' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
+            'className'  => 'Cake\Database\Connection',
+            'driver'     => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => 'localhost',
+            'host'       => 'localhost',
             /*
             * CakePHP will use the default DB port based on the driver selected
             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
             * the following line and set the port accordingly
             */
             //'port' => 'nonstandard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
-            'encoding' => 'utf8',
-            'timezone' => 'UTC',
+            'username'      => 'my_app',
+            'password'      => 'secret',
+            'database'      => 'my_app',
+            'encoding'      => 'utf8',
+            'timezone'      => 'UTC',
             'cacheMetadata' => true,
 
             /*
@@ -244,45 +245,45 @@ $config = [
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
         ],
 
-        /**
+        /*
          * The test connection is used during the test suite.
          */
         'test' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
+            'className'  => 'Cake\Database\Connection',
+            'driver'     => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => 'localhost',
+            'host'       => 'localhost',
             //'port' => 'nonstandard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'test_myapp',
-            'encoding' => 'utf8',
-            'timezone' => 'UTC',
-            'cacheMetadata' => true,
+            'username'         => 'my_app',
+            'password'         => 'secret',
+            'database'         => 'test_myapp',
+            'encoding'         => 'utf8',
+            'timezone'         => 'UTC',
+            'cacheMetadata'    => true,
             'quoteIdentifiers' => false,
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
         ],
     ],
 
-/**
+/*
  * Configures logging options
  */
     'Log' => [
         'debug' => [
             'className' => 'Cake\Log\Engine\FileLog',
-            'path' => LOGS,
-            'file' => 'debug',
-            'levels' => ['notice', 'info', 'debug'],
+            'path'      => LOGS,
+            'file'      => 'debug',
+            'levels'    => ['notice', 'info', 'debug'],
         ],
         'error' => [
             'className' => 'Cake\Log\Engine\FileLog',
-            'path' => LOGS,
-            'file' => 'error',
-            'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
+            'path'      => LOGS,
+            'file'      => 'error',
+            'levels'    => ['warning', 'error', 'critical', 'alert', 'emergency'],
         ],
     ],
 
-/**
+/*
  *
  * Session configuration.
  *

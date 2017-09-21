@@ -1,14 +1,17 @@
 <?php
 /**
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Routing\Filter;
 
 use Cake\Core\Configure;
@@ -19,7 +22,6 @@ use Cake\ORM\TableRegistry;
 use Cake\Routing\DispatcherFilter;
 use Cake\Routing\Router;
 use Cake\Utility\String;
-use DebugKit\Panel\DebugPanel;
 use DebugKit\Panel\PanelRegistry;
 
 /**
@@ -31,7 +33,6 @@ use DebugKit\Panel\PanelRegistry;
  */
 class DebugBarFilter extends DispatcherFilter
 {
-
     use EventManagerTrait;
 
     /**
@@ -63,10 +64,10 @@ class DebugBarFilter extends DispatcherFilter
     ];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Cake\Event\EventManager $events The event manager to use.
-     * @param array $config The configuration data for DebugKit.
+     * @param array                    $config The configuration data for DebugKit.
      */
     public function __construct(EventManager $events, array $config)
     {
@@ -76,7 +77,7 @@ class DebugBarFilter extends DispatcherFilter
     }
 
     /**
-     * Event bindings
+     * Event bindings.
      *
      * @return array
      */
@@ -101,7 +102,7 @@ class DebugBarFilter extends DispatcherFilter
      */
     public function isEnabled()
     {
-        $enabled = (bool)Configure::read('debug');
+        $enabled = (bool) Configure::read('debug');
         if ($enabled) {
             return true;
         }
@@ -109,11 +110,12 @@ class DebugBarFilter extends DispatcherFilter
         if (is_callable($force)) {
             return $force();
         }
+
         return $force;
     }
 
     /**
-     * Get the list of loaded panels
+     * Get the list of loaded panels.
      *
      * @return array
      */
@@ -123,9 +125,10 @@ class DebugBarFilter extends DispatcherFilter
     }
 
     /**
-     * Get the list of loaded panels
+     * Get the list of loaded panels.
      *
      * @param string $name The name of the panel you want to get.
+     *
      * @return DebugKit\Panel\DebugPanel|null The panel or null.
      */
     public function panel($name)
@@ -152,6 +155,7 @@ class DebugBarFilter extends DispatcherFilter
      * Call the initialize method onl all the loaded panels.
      *
      * @param \Cake\Event\Event $event The beforeDispatch event.
+     *
      * @return void
      */
     public function beforeDispatch(Event $event)
@@ -165,6 +169,7 @@ class DebugBarFilter extends DispatcherFilter
      * Save the toolbar data.
      *
      * @param \Cake\Event\Event $event The afterDispatch event.
+     *
      * @return void
      */
     public function afterDispatch(Event $event)
@@ -177,12 +182,12 @@ class DebugBarFilter extends DispatcherFilter
         $response = $event->data['response'];
 
         $data = [
-            'url' => $request->here(),
+            'url'          => $request->here(),
             'content_type' => $response->type(),
-            'method' => $request->method(),
-            'status_code' => $response->statusCode(),
+            'method'       => $request->method(),
+            'status_code'  => $response->statusCode(),
             'requested_at' => $request->env('REQUEST_TIME'),
-            'panels' => []
+            'panels'       => [],
         ];
         $requests = TableRegistry::get('DebugKit.Requests');
         $row = $requests->newEntity($data);
@@ -190,6 +195,7 @@ class DebugBarFilter extends DispatcherFilter
 
         foreach ($this->_registry->loaded() as $name) {
             $panel = $this->_registry->{$name};
+
             try {
                 $content = serialize($panel->data());
             } catch (\Exception $e) {
@@ -198,9 +204,9 @@ class DebugBarFilter extends DispatcherFilter
                 ]);
             }
             $row->panels[] = $requests->Panels->newEntity([
-                'panel' => $name,
+                'panel'   => $name,
                 'element' => $panel->elementName(),
-                'title' => $panel->title(),
+                'title'   => $panel->title(),
                 'summary' => $panel->summary(),
                 'content' => $content,
             ]);
@@ -216,8 +222,9 @@ class DebugBarFilter extends DispatcherFilter
      * The toolbar will only be injected if the response's content type
      * contains HTML and there is a </body> tag.
      *
-     * @param string $id ID to fetch data from.
+     * @param string                 $id       ID to fetch data from.
      * @param \Cake\Network\Response $response The response to augment.
+     *
      * @return void
      */
     protected function _injectScripts($id, $response)
@@ -232,8 +239,8 @@ class DebugBarFilter extends DispatcherFilter
         }
         $url = Router::url('/', true);
         $script = "<script>var __debug_kit_id = '${id}', __debug_kit_base_url = '${url}';</script>";
-        $script .= '<script src="' . Router::url('/debug_kit/js/toolbar.js') . '"></script>';
-        $body = substr($body, 0, $pos) . $script . substr($body, $pos);
+        $script .= '<script src="'.Router::url('/debug_kit/js/toolbar.js').'"></script>';
+        $body = substr($body, 0, $pos).$script.substr($body, $pos);
         $response->body($body);
     }
 }

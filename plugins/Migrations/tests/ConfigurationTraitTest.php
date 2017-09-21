@@ -1,42 +1,43 @@
 <?php
 /**
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Migrations\Test;
 
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
 use Cake\TestSuite\TestCase;
 use Migrations\Command\Create;
-use Migrations\ConfigurationTrait;
 
 /**
- * Tests the create command
+ * Tests the create command.
  */
 class ConfigurationTraitTest extends TestCase
 {
-
     /**
-     * Setup method
+     * Setup method.
      *
      * @return void
      */
     public function setUp()
     {
         parent::setUp();
-        $this->command = new ExampleCommand;
+        $this->command = new ExampleCommand();
     }
 
     /**
      * Returns the combination of the phinx driver name with
-     * the associated cakephp driver instance that should be mapped to it
+     * the associated cakephp driver instance that should be mapped to it.
      *
      * @return void
      */
@@ -45,15 +46,16 @@ class ConfigurationTraitTest extends TestCase
         return [
             ['mysql', $this->getMock('Cake\Database\Driver\Mysql')],
             ['pgsql', $this->getMock('Cake\Database\Driver\Postgres')],
-            ['sqlite', $this->getMock('Cake\Database\Driver\Sqlite')]
+            ['sqlite', $this->getMock('Cake\Database\Driver\Sqlite')],
         ];
     }
 
     /**
      * Tests that the correct driver name is inferred from the driver
-     * instance that is passed to getAdapterName()
+     * instance that is passed to getAdapterName().
      *
      * @dataProvider driversProvider
+     *
      * @return void
      */
     public function testGetAdapterName($expected, $cakeDriver)
@@ -66,7 +68,7 @@ class ConfigurationTraitTest extends TestCase
 
     /**
      * Tests that the configuration object is created out of the database configuration
-     * made for the application
+     * made for the application.
      *
      * @return void
      */
@@ -75,13 +77,13 @@ class ConfigurationTraitTest extends TestCase
         ConnectionManager::config([
             'default' => [
                 'className' => 'Cake\Database\Connection',
-                'driver' => 'Cake\Database\Driver\Mysql',
-                'host' => 'foo.bar',
-                'username' => 'root',
-                'password' => 'the_password',
-                'database' => 'the_database',
-                'encoding' => 'utf-8'
-            ]
+                'driver'    => 'Cake\Database\Driver\Mysql',
+                'host'      => 'foo.bar',
+                'username'  => 'root',
+                'password'  => 'the_password',
+                'database'  => 'the_database',
+                'encoding'  => 'utf-8',
+            ],
         ]);
 
         $input = $this->getMock('Symfony\Component\Console\Input\InputInterface');
@@ -89,7 +91,7 @@ class ConfigurationTraitTest extends TestCase
         $config = $this->command->getConfig();
         $this->assertInstanceOf('Phinx\Config\Config', $config);
 
-        $expected = ROOT . DS . 'config' . DS . 'Migrations';
+        $expected = ROOT.DS.'config'.DS.'Migrations';
         $this->assertEquals($expected, $config->getMigrationPath());
 
         $this->assertEquals(
@@ -108,13 +110,13 @@ class ConfigurationTraitTest extends TestCase
     }
 
     /**
-     * Tests that another phinxlog table is used when passing the plugin option in the input
+     * Tests that another phinxlog table is used when passing the plugin option in the input.
      *
      * @return void
      */
     public function testGetConfigWithPlugin()
     {
-        $tmpPath = rtrim(sys_get_temp_dir(), DS) . DS;
+        $tmpPath = rtrim(sys_get_temp_dir(), DS).DS;
         Plugin::load('MyPlugin', ['path' => $tmpPath]);
         $input = $this->getMock('Symfony\Component\Console\Input\InputInterface');
         $this->command->setInput($input);
@@ -140,7 +142,7 @@ class ConfigurationTraitTest extends TestCase
 
     /**
      * Tests that passing a connection option in the input will configure the environment
-     * to use that connection
+     * to use that connection.
      *
      * @return void
      */
@@ -149,13 +151,13 @@ class ConfigurationTraitTest extends TestCase
         ConnectionManager::config([
             'custom' => [
                 'className' => 'Cake\Database\Connection',
-                'driver' => 'Cake\Database\Driver\Mysql',
-                'host' => 'foo.bar.baz',
-                'username' => 'rooty',
-                'password' => 'the_password2',
-                'database' => 'the_database2',
-                'encoding' => 'utf-8'
-            ]
+                'driver'    => 'Cake\Database\Driver\Mysql',
+                'host'      => 'foo.bar.baz',
+                'username'  => 'rooty',
+                'password'  => 'the_password2',
+                'database'  => 'the_database2',
+                'encoding'  => 'utf-8',
+            ],
         ]);
 
         $input = $this->getMock('Symfony\Component\Console\Input\InputInterface');
@@ -174,7 +176,7 @@ class ConfigurationTraitTest extends TestCase
         $config = $this->command->getConfig();
         $this->assertInstanceOf('Phinx\Config\Config', $config);
 
-        $expected = ROOT . DS . 'config' . DS . 'Migrations';
+        $expected = ROOT.DS.'config'.DS.'Migrations';
         $this->assertEquals($expected, $config->getMigrationPath());
 
         $this->assertEquals(

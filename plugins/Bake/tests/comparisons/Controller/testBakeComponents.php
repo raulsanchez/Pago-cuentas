@@ -1,10 +1,9 @@
 <?php
+
 namespace App\Controller;
 
-use App\Controller\AppController;
-
 /**
- * BakeArticles Controller
+ * BakeArticles Controller.
  *
  * @property \App\Model\Table\BakeArticlesTable $BakeArticles
  * @property \Cake\Controller\Component\CsrfComponent $Csrf
@@ -14,11 +13,10 @@ use App\Controller\AppController;
  * @property \App\Controller\Component\AppleComponent $Apple
  * @property \App\Controller\Component\NonExistentComponent $NonExistent
  */
-class BakeArticlesController extends AppController
+class testBakeComponents extends AppController
 {
-
     /**
-     * Components
+     * Components.
      *
      * @var array
      */

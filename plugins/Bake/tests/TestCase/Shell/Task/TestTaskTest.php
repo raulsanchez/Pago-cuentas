@@ -1,21 +1,23 @@
 <?php
 /**
  * CakePHP :  Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Test\TestCase\Shell\Task;
 
 use Bake\Shell\Task\TemplateTask;
-use Bake\Shell\Task\TestTask;
 use Bake\Test\App\Controller\PostsController;
 use Bake\Test\App\Model\Table\ArticlesTable;
 use Bake\Test\App\Model\Table\CategoryThreadsTable;
@@ -30,13 +32,12 @@ use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 
 /**
- * TestTaskTest class
- *
+ * TestTaskTest class.
  */
 class TestTaskTest extends TestCase
 {
     /**
-     * Fixtures
+     * Fixtures.
      *
      * @var string
      */
@@ -49,14 +50,14 @@ class TestTaskTest extends TestCase
     ];
 
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
     public function setUp()
     {
         parent::setUp();
-        $this->_compareBasePath = Plugin::path('Bake') . 'tests' . DS . 'comparisons' . DS . 'Test' . DS;
+        $this->_compareBasePath = Plugin::path('Bake').'tests'.DS.'comparisons'.DS.'Test'.DS;
         $this->io = $this->getMock('Cake\Console\ConsoleIo', [], [], '', false);
 
         $this->Task = $this->getMock(
@@ -70,7 +71,7 @@ class TestTaskTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -100,7 +101,7 @@ class TestTaskTest extends TestCase
     }
 
     /**
-     * Test outputTypeChoices method
+     * Test outputTypeChoices method.
      *
      * @return void
      */
@@ -141,7 +142,7 @@ class TestTaskTest extends TestCase
     }
 
     /**
-     * test execute with type and class name defined
+     * test execute with type and class name defined.
      *
      * @return void
      */
@@ -149,7 +150,7 @@ class TestTaskTest extends TestCase
     {
         $this->Task->expects($this->once())->method('createFile')
             ->with(
-                $this->stringContains('TestCase' . DS . 'Model' . DS . 'Table' . DS . 'TestTaskTagTableTest.php'),
+                $this->stringContains('TestCase'.DS.'Model'.DS.'Table'.DS.'TestTaskTagTableTest.php'),
                 $this->stringContains('class TestTaskTagTableTest extends TestCase')
             );
         $this->Task->main('Table', 'TestTaskTag');
@@ -164,7 +165,7 @@ class TestTaskTest extends TestCase
     {
         $expected = [
             'ArticlesTable',
-            'CategoryThreadsTable'
+            'CategoryThreadsTable',
         ];
 
         $choices = $this->Task->outputClassChoices('Table');
@@ -184,7 +185,7 @@ class TestTaskTest extends TestCase
         $expected = [
             'AuthorsTable',
             'BakeTestCommentsTable',
-            'CommentsTable'
+            'CommentsTable',
         ];
 
         $choices = $this->Task->outputClassChoices('Table');
@@ -217,7 +218,7 @@ class TestTaskTest extends TestCase
             'app.articles',
             'app.authors',
             'app.tags',
-            'app.articles_tags'
+            'app.articles_tags',
         ];
         $this->assertEquals($expected, $result);
     }
@@ -281,9 +282,10 @@ class TestTaskTest extends TestCase
     }
 
     /**
-     * test that resolving class names works
+     * test that resolving class names works.
      *
      * @dataProvider realClassProvider
+     *
      * @return void
      */
     public function testGetRealClassname($type, $name, $expected)
@@ -293,7 +295,7 @@ class TestTaskTest extends TestCase
     }
 
     /**
-     * test resolving class names with plugins
+     * test resolving class names with plugins.
      *
      * @return void
      */
@@ -307,7 +309,7 @@ class TestTaskTest extends TestCase
     }
 
     /**
-     * Test baking a test for a concrete model with fixtures arg
+     * Test baking a test for a concrete model with fixtures arg.
      *
      * @return void
      */
@@ -319,7 +321,7 @@ class TestTaskTest extends TestCase
 
         $this->Task->params['fixtures'] = 'app.posts, app.comments , app.users ,';
         $result = $this->Task->bake('Table', 'Articles');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
@@ -334,7 +336,7 @@ class TestTaskTest extends TestCase
             ->will($this->returnValue(true));
 
         $result = $this->Task->bake('Cell', 'Articles');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
@@ -349,11 +351,11 @@ class TestTaskTest extends TestCase
             ->will($this->returnValue(true));
 
         $result = $this->Task->bake('Table', 'Articles');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking controller test files
+     * test baking controller test files.
      *
      * @return void
      */
@@ -366,11 +368,11 @@ class TestTaskTest extends TestCase
             ->will($this->returnValue(true));
 
         $result = $this->Task->bake('Controller', 'PostsController');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking controller test files
+     * test baking controller test files.
      *
      * @return void
      */
@@ -380,15 +382,15 @@ class TestTaskTest extends TestCase
 
         $this->Task->expects($this->once())
             ->method('createFile')
-            ->with($this->stringContains('Controller' . DS . 'Admin' . DS . 'PostsControllerTest.php'))
+            ->with($this->stringContains('Controller'.DS.'Admin'.DS.'PostsControllerTest.php'))
             ->will($this->returnValue(true));
 
         $result = $this->Task->bake('controller', 'Admin\Posts');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking component test files,
+     * test baking component test files,.
      *
      * @return void
      */
@@ -401,11 +403,11 @@ class TestTaskTest extends TestCase
             ->will($this->returnValue(true));
 
         $result = $this->Task->bake('Component', 'Apple');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking behavior test files,
+     * test baking behavior test files,.
      *
      * @return void
      */
@@ -416,11 +418,11 @@ class TestTaskTest extends TestCase
             ->will($this->returnValue(true));
 
         $result = $this->Task->bake('Behavior', 'Example');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking helper test files,
+     * test baking helper test files,.
      *
      * @return void
      */
@@ -431,7 +433,7 @@ class TestTaskTest extends TestCase
             ->will($this->returnValue(true));
 
         $result = $this->Task->bake('Helper', 'Example');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
@@ -446,11 +448,11 @@ class TestTaskTest extends TestCase
             ->will($this->returnValue(true));
 
         $result = $this->Task->bake('Shell', 'Articles');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test Constructor generation ensure that constructClasses is called for controllers
+     * test Constructor generation ensure that constructClasses is called for controllers.
      *
      * @return void
      */
@@ -464,21 +466,21 @@ class TestTaskTest extends TestCase
         $expected = [
             "\$config = TableRegistry::exists('Posts') ? [] : ['className' => 'App\Model\\Table\PostsTable'];",
             "TableRegistry::get('Posts', \$config);",
-            ''
+            '',
         ];
         $this->assertEquals($expected, $result);
 
         $result = $this->Task->generateConstructor('helper', 'FormHelper');
-        $expected = ["\$view = new View();", "new FormHelper(\$view);", ''];
+        $expected = ['$view = new View();', 'new FormHelper($view);', ''];
         $this->assertEquals($expected, $result);
 
         $result = $this->Task->generateConstructor('entity', 'TestBake\Model\Entity\Article');
-        $expected = ["", "new Article();", ''];
+        $expected = ['', 'new Article();', ''];
         $this->assertEquals($expected, $result);
     }
 
     /**
-     * Test generateUses()
+     * Test generateUses().
      *
      * @return void
      */
@@ -513,7 +515,7 @@ class TestTaskTest extends TestCase
     }
 
     /**
-     * Test that mock class generation works for the appropriate classes
+     * Test that mock class generation works for the appropriate classes.
      *
      * @return void
      */
@@ -524,7 +526,7 @@ class TestTaskTest extends TestCase
     }
 
     /**
-     * test bake() with a -plugin param
+     * test bake() with a -plugin param.
      *
      * @return void
      */
@@ -532,8 +534,8 @@ class TestTaskTest extends TestCase
     {
         $this->Task->plugin = 'TestTest';
 
-        Plugin::load('TestTest', ['path' => APP . 'Plugin' . DS . 'TestTest' . DS]);
-        $path = APP . 'Plugin/TestTest/tests/TestCase/View/Helper/FormHelperTest.php';
+        Plugin::load('TestTest', ['path' => APP.'Plugin'.DS.'TestTest'.DS]);
+        $path = APP.'Plugin/TestTest/tests/TestCase/View/Helper/FormHelperTest.php';
         $path = str_replace('/', DS, $path);
         $this->Task->expects($this->once())->method('createFile')
             ->with($path, $this->anything());
@@ -558,7 +560,7 @@ class TestTaskTest extends TestCase
             [
                 'Component',
                 'App\Controller\Component\AuthComponent',
-                'TestCase/Controller/Component/AuthComponentTest.php'
+                'TestCase/Controller/Component/AuthComponentTest.php',
             ],
             ['entity', 'App\Model\Entity\Article', 'TestCase/Model/Entity/ArticleTest.php'],
             ['table', 'App\Model\Table\PostsTable', 'TestCase/Model/Table/PostsTableTest.php'],
@@ -568,7 +570,7 @@ class TestTaskTest extends TestCase
             [
                 'component',
                 'App\Controller\Component\AuthComponent',
-                'TestCase/Controller/Component/AuthComponentTest.php'
+                'TestCase/Controller/Component/AuthComponentTest.php',
             ],
             ['Shell', 'App\Shell\ExampleShell', 'TestCase/Shell/ExampleShellTest.php'],
             ['shell', 'App\Shell\ExampleShell', 'TestCase/Shell/ExampleShellTest.php'],
@@ -576,15 +578,16 @@ class TestTaskTest extends TestCase
     }
 
     /**
-     * Test filename generation for each type + plugins
+     * Test filename generation for each type + plugins.
      *
      * @dataProvider caseFileNameProvider
+     *
      * @return void
      */
     public function testTestCaseFileName($type, $class, $expected)
     {
         $result = $this->Task->testCaseFileName($type, $class);
-        $this->assertPathEquals(ROOT . DS . 'tests' . DS . $expected, $result);
+        $this->assertPathEquals(ROOT.DS.'tests'.DS.$expected, $result);
     }
 
     /**
@@ -594,14 +597,14 @@ class TestTaskTest extends TestCase
      */
     public function testTestCaseFileNamePlugin()
     {
-        $this->Task->path = DS . 'my/path/tests/';
+        $this->Task->path = DS.'my/path/tests/';
 
-        Plugin::load('TestTest', ['path' => APP . 'Plugin' . DS . 'TestTest' . DS]);
+        Plugin::load('TestTest', ['path' => APP.'Plugin'.DS.'TestTest'.DS]);
         $this->Task->plugin = 'TestTest';
         $class = 'TestBake\Model\Entity\Post';
         $result = $this->Task->testCaseFileName('entity', $class);
 
-        $expected = APP . 'Plugin/TestTest/tests/TestCase/Model/Entity/PostTest.php';
+        $expected = APP.'Plugin/TestTest/tests/TestCase/Model/Entity/PostTest.php';
         $this->assertPathEquals($expected, $result);
     }
 
@@ -633,6 +636,7 @@ class TestTaskTest extends TestCase
      * Test that mapType returns the correct package names.
      *
      * @dataProvider mapTypeProvider
+     *
      * @return void
      */
     public function testMapType($original, $expected)

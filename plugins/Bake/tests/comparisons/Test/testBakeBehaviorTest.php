@@ -1,17 +1,17 @@
 <?php
+
 namespace App\Test\TestCase\Model\Behavior;
 
 use App\Model\Behavior\ExampleBehavior;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Behavior\ExampleBehavior Test Case
+ * App\Model\Behavior\ExampleBehavior Test Case.
  */
-class ExampleBehaviorTest extends TestCase
+class testBakeBehaviorTest extends TestCase
 {
-
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
@@ -22,7 +22,7 @@ class ExampleBehaviorTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -34,7 +34,7 @@ class ExampleBehaviorTest extends TestCase
     }
 
     /**
-     * Test initial setup
+     * Test initial setup.
      *
      * @return void
      */

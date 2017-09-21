@@ -1,62 +1,62 @@
 <?php
+
 namespace App\Controller;
 
-use App\Controller\AppController;
-
 /**
- * BakeArticles Controller
+ * BakeArticles Controller.
  *
  * @property \App\Model\Table\BakeArticlesTable $BakeArticles
  * @property \Cake\Controller\Component\CsrfComponent $Csrf
  * @property \Cake\Controller\Component\AuthComponent $Auth
  */
-class BakeArticlesController extends AppController
+class testBakeActions extends AppController
 {
-
     /**
-     * Helpers
+     * Helpers.
      *
      * @var array
      */
     public $helpers = ['Html', 'Time'];
 
     /**
-     * Components
+     * Components.
      *
      * @var array
      */
     public $components = ['Csrf', 'Auth'];
 
     /**
-     * Index method
+     * Index method.
      *
      * @return void
      */
     public function index()
     {
         $this->paginate = [
-            'contain' => ['BakeUsers']
+            'contain' => ['BakeUsers'],
         ];
         $this->set('bakeArticles', $this->paginate($this->BakeArticles));
     }
 
     /**
-     * View method
+     * View method.
      *
      * @param string|null $id Bake Article id
-     * @return void
+     *
      * @throws \Cake\Network\Exception\NotFoundException
+     *
+     * @return void
      */
     public function view($id = null)
     {
         $bakeArticle = $this->BakeArticles->get($id, [
-            'contain' => ['BakeUsers', 'BakeTags', 'BakeComments']
+            'contain' => ['BakeUsers', 'BakeTags', 'BakeComments'],
         ]);
         $this->set('bakeArticle', $bakeArticle);
     }
 
     /**
-     * Add method
+     * Add method.
      *
      * @return void
      */
@@ -67,6 +67,7 @@ class BakeArticlesController extends AppController
             $bakeArticle = $this->BakeArticles->patchEntity($bakeArticle, $this->request->data);
             if ($this->BakeArticles->save($bakeArticle)) {
                 $this->Flash->success('The bake article has been saved.');
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error('The bake article could not be saved. Please, try again.');
@@ -78,21 +79,24 @@ class BakeArticlesController extends AppController
     }
 
     /**
-     * Edit method
+     * Edit method.
      *
      * @param string|null $id Bake Article id
-     * @return void
+     *
      * @throws \Cake\Network\Exception\NotFoundException
+     *
+     * @return void
      */
     public function edit($id = null)
     {
         $bakeArticle = $this->BakeArticles->get($id, [
-            'contain' => ['BakeTags']
+            'contain' => ['BakeTags'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $bakeArticle = $this->BakeArticles->patchEntity($bakeArticle, $this->request->data);
             if ($this->BakeArticles->save($bakeArticle)) {
                 $this->Flash->success('The bake article has been saved.');
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error('The bake article could not be saved. Please, try again.');
@@ -104,11 +108,13 @@ class BakeArticlesController extends AppController
     }
 
     /**
-     * Delete method
+     * Delete method.
      *
      * @param string|null $id Bake Article id
-     * @return void
+     *
      * @throws \Cake\Network\Exception\NotFoundException
+     *
+     * @return void
      */
     public function delete($id = null)
     {
@@ -119,6 +125,7 @@ class BakeArticlesController extends AppController
         } else {
             $this->Flash->error('The bake article could not be deleted. Please, try again.');
         }
+
         return $this->redirect(['action' => 'index']);
     }
 }

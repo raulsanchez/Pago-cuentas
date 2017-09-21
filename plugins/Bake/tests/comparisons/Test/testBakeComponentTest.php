@@ -1,4 +1,5 @@
 <?php
+
 namespace Bake\Test\App\Test\TestCase\Controller\Component;
 
 use Bake\Test\App\Controller\Component\AppleComponent;
@@ -6,13 +7,12 @@ use Cake\Controller\ComponentRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * Bake\Test\App\Controller\Component\AppleComponent Test Case
+ * Bake\Test\App\Controller\Component\AppleComponent Test Case.
  */
-class AppleComponentTest extends TestCase
+class testBakeComponentTest extends TestCase
 {
-
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
@@ -24,7 +24,7 @@ class AppleComponentTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -36,7 +36,7 @@ class AppleComponentTest extends TestCase
     }
 
     /**
-     * Test startup method
+     * Test startup method.
      *
      * @return void
      */

@@ -1,17 +1,20 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Shell\Task;
 
 /**
@@ -27,7 +30,7 @@ class CellTask extends SimpleBakeTask
     public $pathFragment = 'View/Cell/';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function name()
     {
@@ -35,15 +38,15 @@ class CellTask extends SimpleBakeTask
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function fileName($name)
     {
-        return $name . 'Cell.php';
+        return $name.'Cell.php';
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function template()
     {
@@ -54,11 +57,13 @@ class CellTask extends SimpleBakeTask
      * Bake the Cell class and template file.
      *
      * @param string $name The name of the cell to make.
+     *
      * @return void
      */
     public function bake($name)
     {
         $this->bakeTemplate($name);
+
         return parent::bake($name);
     }
 
@@ -66,6 +71,7 @@ class CellTask extends SimpleBakeTask
      * Bake an empty file for a cell.
      *
      * @param string $name The name of the cell a template is needed for.
+     *
      * @return void
      */
     public function bakeTemplate($name)

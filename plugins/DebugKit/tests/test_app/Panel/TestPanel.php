@@ -1,6 +1,6 @@
 <?php
 /**
- * Test Panel of test_app
+ * Test Panel of test_app.
  *
  * PHP 5
  *
@@ -11,25 +11,27 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         DebugKit 0.1
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Test\test_app\Panel;
 
 use Cake\Controller\Controller;
 use DebugKit\DebugPanel;
 
 /**
- * Class TestPanel
+ * Class TestPanel.
  *
  * @since         DebugKit 0.1
  */
 class TestPanel extends DebugPanel
 {
-
     /**
-     * Startup
+     * Startup.
      *
      * @param Controller $controller
      */

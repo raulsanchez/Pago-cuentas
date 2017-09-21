@@ -1,26 +1,25 @@
 <?php
+
 namespace Bake\Test\App\Test\TestCase\Controller\Admin;
 
-use Bake\Test\App\Controller\Admin\PostsController;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
- * Bake\Test\App\Controller\Admin\PostsController Test Case
+ * Bake\Test\App\Controller\Admin\PostsController Test Case.
  */
-class PostsControllerTest extends IntegrationTestCase
+class testBakePrefixControllerTest extends IntegrationTestCase
 {
-
     /**
-     * Fixtures
+     * Fixtures.
      *
      * @var array
      */
     public $fixtures = [
-        'Posts' => 'app.posts'
+        'Posts' => 'app.posts',
     ];
 
     /**
-     * Test index method
+     * Test index method.
      *
      * @return void
      */
@@ -30,7 +29,7 @@ class PostsControllerTest extends IntegrationTestCase
     }
 
     /**
-     * Test add method
+     * Test add method.
      *
      * @return void
      */

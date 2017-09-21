@@ -1,6 +1,6 @@
 <?php
 /**
- * Routes configuration
+ * Routes configuration.
  *
  * In this file, you set up routes to your controllers and their actions.
  * Routes are very important mechanism that allows you to freely connect
@@ -14,14 +14,15 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 use Cake\Core\Plugin;
 use Cake\Routing\Router;
 
-/**
+/*
  * The default class to use for all routes
  *
  * The following route classes are supplied with CakePHP and are appropriate
@@ -42,7 +43,7 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('Route');
 
 Router::scope('/', function ($routes) {
-    /**
+    /*
  * Here, we are connecting '/' (base path) to a controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, src/Template/Pages/home.ctp)...
@@ -50,13 +51,12 @@ Router::scope('/', function ($routes) {
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'index', 'index', true]);
     // $routes->connect('/', ['controller' => 'Cuentas', 'action' => 'index', 'home']);
 
-
-    /**
+    /*
  * ...and connect the rest of 'Pages' controller's URLs.
  */
     //$routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-    /**
+    /*
  * Connect catchall routes for all controllers.
  *
  * Using the argument `InflectedRoute`, the `fallbacks` method is a shortcut for
@@ -75,7 +75,7 @@ Router::scope('/', function ($routes) {
     $routes->fallbacks('InflectedRoute');
 });
 
-/**
+/*
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.
  */

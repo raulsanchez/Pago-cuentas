@@ -1,24 +1,26 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Shell\Task;
 
 use Cake\Filesystem\Folder;
 
 /**
- * Task class for creating new project apps and plugins
- *
+ * Task class for creating new project apps and plugins.
  */
 class ProjectTask extends BakeTask
 {
@@ -45,7 +47,7 @@ class ProjectTask extends BakeTask
             if (empty($appContents)) {
                 $suggestedPath = rtrim(APP, DS);
             } else {
-                $suggestedPath = APP . 'MyApp';
+                $suggestedPath = APP.'MyApp';
             }
         }
 
@@ -56,20 +58,21 @@ class ProjectTask extends BakeTask
 
         $namespace = basename($project);
         if (!preg_match('/^\w[\w\d_]+$/', $namespace)) {
-            $err = 'Project Name/Namespace must start with a letter' .
+            $err = 'Project Name/Namespace must start with a letter'.
                 ' and can only contain letters, digits and underscore';
             $this->err($err);
             $this->args = [];
+
             return $this->main();
         }
 
         if ($project && !Folder::isAbsolute($project) && isset($_SERVER['PWD'])) {
-            $project = $_SERVER['PWD'] . DS . $project;
+            $project = $_SERVER['PWD'].DS.$project;
         }
 
         $response = false;
-        $bootstrapPath = '..' . DS . 'config' . DS . 'boostrap.php';
-        while (!$response && is_dir($project) === true && file_exists($project . $boostrapPath)) {
+        $bootstrapPath = '..'.DS.'config'.DS.'boostrap.php';
+        while (!$response && is_dir($project) === true && file_exists($project.$boostrapPath)) {
             $prompt = sprintf('<warning>A project already exists in this location:</warning> %s Overwrite?', $project);
             $response = $this->in($prompt, ['y', 'n'], 'n');
             if (strtolower($response) === 'n') {
@@ -79,11 +82,13 @@ class ProjectTask extends BakeTask
 
         if ($project === false) {
             $this->out('Aborting project creation.');
+
             return;
         }
 
         if ($this->bake($project)) {
             $this->out('<success>Project baked successfully!</success>');
+
             return $project;
         }
     }
@@ -107,6 +112,7 @@ class ProjectTask extends BakeTask
             $paths = explode(PATH_SEPARATOR, $path);
             $composer = $this->_searchPath($paths);
         }
+
         return $composer;
     }
 
@@ -114,6 +120,7 @@ class ProjectTask extends BakeTask
      * Search the $PATH for composer.
      *
      * @param array $path The paths to search.
+     *
      * @return string|bool
      */
     protected function _searchPath($path)
@@ -121,12 +128,14 @@ class ProjectTask extends BakeTask
         $composer = ['composer.phar', 'composer'];
         foreach ($path as $dir) {
             foreach ($composer as $cmd) {
-                if (is_file($dir . DS . $cmd)) {
-                    $this->_io->verbose('Found composer executable in ' . $dir);
-                    return $dir . DS . $cmd;
+                if (is_file($dir.DS.$cmd)) {
+                    $this->_io->verbose('Found composer executable in '.$dir);
+
+                    return $dir.DS.$cmd;
                 }
             }
         }
+
         return false;
     }
 
@@ -134,26 +143,29 @@ class ProjectTask extends BakeTask
      * Uses composer to generate a new package using the cakephp/app project.
      *
      * @param string $path Project path
+     *
      * @return mixed
      */
     public function bake($path)
     {
         $composer = $this->findComposer();
         if (!$composer) {
-            $err = 'Cannot bake project. Could not find composer.' .
+            $err = 'Cannot bake project. Could not find composer.'.
                ' Add composer to your PATH, or use the -composer option.';
             $this->error($err);
+
             return false;
         }
         $this->out('<info>Downloading a new cakephp app from packagist.org</info>');
 
-        $command = 'php ' . escapeshellarg($composer) . ' create-project -s dev cakephp/app ' . escapeshellarg($path);
+        $command = 'php '.escapeshellarg($composer).' create-project -s dev cakephp/app '.escapeshellarg($path);
 
         try {
             $this->callProcess($command);
         } catch (\RuntimeException $e) {
             $error = $e->getMessage();
             $this->error('Installation from packagist.org failed with: %s', $error);
+
             return false;
         }
 
@@ -168,19 +180,20 @@ class ProjectTask extends BakeTask
     public function getOptionParser()
     {
         $parser = parent::getOptionParser();
+
         return $parser->description(
             'Generate a new CakePHP project skeleton.'
         )->addArgument('name', [
-                'help' => 'Application directory to make, if it starts with "/" the path is absolute.'
+                'help' => 'Application directory to make, if it starts with "/" the path is absolute.',
             ])->addOption('empty', [
                 'boolean' => true,
-                'help' => 'Create empty files in each of the directories. Good if you are using git'
+                'help'    => 'Create empty files in each of the directories. Good if you are using git',
             ])->addOption('template', [
                 'short' => 't',
-                'help' => 'Template to use when baking code.'
+                'help'  => 'Template to use when baking code.',
             ])->addOption('composer', [
-                'default' => ROOT . DS . 'composer.phar',
-                'help' => 'The path to the composer executable.'
+                'default' => ROOT.DS.'composer.phar',
+                'help'    => 'The path to the composer executable.',
             ])->removeOption('plugin');
     }
 }

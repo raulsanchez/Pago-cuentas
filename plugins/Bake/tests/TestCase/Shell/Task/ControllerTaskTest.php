@@ -1,17 +1,20 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Test\TestCase\Shell\Task;
 
 use Bake\Shell\Task\TemplateTask;
@@ -21,13 +24,12 @@ use Cake\ORM\TableRegistry;
 use Cake\View\Helper;
 
 /**
- * ControllerTaskTest class
- *
+ * ControllerTaskTest class.
  */
 class ControllerTaskTest extends TestCase
 {
     /**
-     * fixtures
+     * fixtures.
      *
      * @var array
      */
@@ -35,18 +37,18 @@ class ControllerTaskTest extends TestCase
         'plugin.bake.bake_articles',
         'plugin.bake.bake_articles_bake_tags',
         'plugin.bake.bake_comments',
-        'plugin.bake.bake_tags'
+        'plugin.bake.bake_tags',
     ];
 
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
     public function setUp()
     {
         parent::setUp();
-        $this->_compareBasePath = Plugin::path('Bake') . 'tests' . DS . 'comparisons' . DS . 'Controller' . DS;
+        $this->_compareBasePath = Plugin::path('Bake').'tests'.DS.'comparisons'.DS.'Controller'.DS;
         $io = $this->getMock('Cake\Console\ConsoleIo', [], [], '', false);
         $this->Task = $this->getMock(
             'Bake\Shell\Task\ControllerTask',
@@ -70,12 +72,12 @@ class ControllerTaskTest extends TestCase
         );
 
         TableRegistry::get('BakeArticles', [
-            'className' => __NAMESPACE__ . '\BakeArticlesTable'
+            'className' => __NAMESPACE__.'\BakeArticlesTable',
         ]);
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -88,7 +90,7 @@ class ControllerTaskTest extends TestCase
     }
 
     /**
-     * test ListAll
+     * test ListAll.
      *
      * @return void
      */
@@ -102,7 +104,7 @@ class ControllerTaskTest extends TestCase
     }
 
     /**
-     * test component generation
+     * test component generation.
      *
      * @return void
      */
@@ -117,7 +119,7 @@ class ControllerTaskTest extends TestCase
     }
 
     /**
-     * test helper generation
+     * test helper generation.
      *
      * @return void
      */
@@ -132,7 +134,7 @@ class ControllerTaskTest extends TestCase
     }
 
     /**
-     * test bake with various component name variants
+     * test bake with various component name variants.
      *
      * @return void
      */
@@ -143,15 +145,15 @@ class ControllerTaskTest extends TestCase
             ->will($this->returnValue(true));
 
         $this->Task->params['no-actions'] = true;
-        $this->Task->params['components'] = 'Csrf, Auth, Company/TestBakeThree.Something,' .
+        $this->Task->params['components'] = 'Csrf, Auth, Company/TestBakeThree.Something,'.
            ' TestBake.Other, Apple, NonExistent';
 
         $result = $this->Task->bake('BakeArticles');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test the bake method
+     * test the bake method.
      *
      * @return void
      */
@@ -166,7 +168,7 @@ class ControllerTaskTest extends TestCase
         $this->Task->params['components'] = 'Csrf, Auth';
 
         $result = $this->Task->bake('BakeArticles');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
@@ -179,7 +181,7 @@ class ControllerTaskTest extends TestCase
         $this->Task->params['helpers'] = 'Html,Time';
         $this->Task->params['components'] = 'Csrf, Auth';
 
-        $filename = APP . 'Controller/BakeArticlesController.php';
+        $filename = APP.'Controller/BakeArticlesController.php';
         $this->Task->expects($this->at(1))
             ->method('createFile')
             ->with(
@@ -187,7 +189,7 @@ class ControllerTaskTest extends TestCase
                 $this->stringContains('class BakeArticlesController')
             );
         $result = $this->Task->bake('BakeArticles');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
@@ -199,7 +201,7 @@ class ControllerTaskTest extends TestCase
     {
         $this->Task->params['prefix'] = 'admin';
 
-        $filename = $this->_normalizePath(APP . 'Controller/Admin/BakeArticlesController.php');
+        $filename = $this->_normalizePath(APP.'Controller/Admin/BakeArticlesController.php');
         $this->Task->expects($this->at(1))
             ->method('createFile')
             ->with($filename, $this->anything());
@@ -214,7 +216,7 @@ class ControllerTaskTest extends TestCase
     }
 
     /**
-     * test bake() with a -plugin param
+     * test bake() with a -plugin param.
      *
      * @return void
      */
@@ -222,8 +224,8 @@ class ControllerTaskTest extends TestCase
     {
         $this->Task->plugin = 'ControllerTest';
 
-        Plugin::load('ControllerTest', ['path' => APP . 'Plugin/ControllerTest/']);
-        $path = APP . 'Plugin/ControllerTest/src/Controller/BakeArticlesController.php';
+        Plugin::load('ControllerTest', ['path' => APP.'Plugin/ControllerTest/']);
+        $path = APP.'Plugin/ControllerTest/src/Controller/BakeArticlesController.php';
 
         $this->Task->expects($this->at(1))
             ->method('createFile')
@@ -232,23 +234,22 @@ class ControllerTaskTest extends TestCase
 
         $result = $this->Task->bake('BakeArticles');
 
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     *
-     * test that bakeActions is creating the correct controller Code. (Using sessions)
+     * test that bakeActions is creating the correct controller Code. (Using sessions).
      *
      * @return void
      */
     public function testBakeActionsContent()
     {
         $result = $this->Task->bake('BakeArticles');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * test baking a test
+     * test baking a test.
      *
      * @return void
      */
@@ -267,7 +268,7 @@ class ControllerTaskTest extends TestCase
     }
 
     /**
-     * test baking a test
+     * test baking a test.
      *
      * @return void
      */
@@ -300,7 +301,7 @@ class ControllerTaskTest extends TestCase
     }
 
     /**
-     * test that execute runs all when the first arg == all
+     * test that execute runs all when the first arg == all.
      *
      * @return void
      */
@@ -312,7 +313,7 @@ class ControllerTaskTest extends TestCase
         $this->Task->Test->expects($this->atLeastOnce())
             ->method('bake');
 
-        $filename = $this->_normalizePath(APP . 'Controller/BakeArticlesController.php');
+        $filename = $this->_normalizePath(APP.'Controller/BakeArticlesController.php');
         $this->Task->expects($this->at(1))
             ->method('createFile')
             ->with($filename, $this->logicalAnd(
@@ -325,14 +326,14 @@ class ControllerTaskTest extends TestCase
     }
 
     /**
-     * data provider for testMainWithControllerNameVariations
+     * data provider for testMainWithControllerNameVariations.
      *
      * @return void
      */
     public static function nameVariations()
     {
         return [
-            ['BakeArticles'], ['bake_articles']
+            ['BakeArticles'], ['bake_articles'],
         ];
     }
 
@@ -340,13 +341,14 @@ class ControllerTaskTest extends TestCase
      * test that both plural and singular forms work for controller baking.
      *
      * @dataProvider nameVariations
+     *
      * @return void
      */
     public function testMainWithControllerNameVariations($name)
     {
         $this->Task->connection = 'test';
 
-        $filename = $this->_normalizePath(APP . 'Controller/BakeArticlesController.php');
+        $filename = $this->_normalizePath(APP.'Controller/BakeArticlesController.php');
         $this->Task->expects($this->once())
             ->method('createFile')
             ->with($filename, $this->stringContains('public function index()'));
@@ -354,7 +356,7 @@ class ControllerTaskTest extends TestCase
     }
 
     /**
-     * test main with plugin.name
+     * test main with plugin.name.
      *
      * @return void
      */
@@ -362,8 +364,8 @@ class ControllerTaskTest extends TestCase
     {
         $this->Task->connection = 'test';
 
-        Plugin::load('ControllerTest', ['path' => APP . 'Plugin/ControllerTest/']);
-        $path = APP . 'Plugin/ControllerTest/src/Controller/BakeArticlesController.php';
+        Plugin::load('ControllerTest', ['path' => APP.'Plugin/ControllerTest/']);
+        $path = APP.'Plugin/ControllerTest/src/Controller/BakeArticlesController.php';
 
         $this->Task->expects($this->at(1))
             ->method('createFile')
