@@ -1,15 +1,18 @@
 <?php
 /**
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Model\Table;
 
 use Cake\Core\App;
@@ -24,15 +27,16 @@ use Cake\Core\App;
  */
 trait LazyTableTrait
 {
-
     /**
      * Ensures the tables for the given fixtures exist in the schema.
      *
      * If the tables do not exist, they will be created on the current model's connection.
      *
      * @param array $fixtures The fixture names to check and/or insert.
-     * @return void
+     *
      * @throws \RuntimeException When fixtures are missing/unknown/fail.
+     *
+     * @return void
      */
     public function ensureTables(array $fixtures)
     {

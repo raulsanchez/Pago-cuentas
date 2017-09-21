@@ -1,35 +1,37 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Test\TestCase\Shell;
 
 use Bake\Test\TestCase\TestCase;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Shell\BakeShellShell;
 
 class BakeShellTest extends TestCase
 {
     /**
-     * fixtures
+     * fixtures.
      *
      * @var array
      */
     public $fixtures = ['core.comments'];
 
     /**
-     * setup test
+     * setup test.
      *
      * @return void
      */
@@ -47,7 +49,7 @@ class BakeShellTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -58,7 +60,7 @@ class BakeShellTest extends TestCase
     }
 
     /**
-     * test bake all
+     * test bake all.
      *
      * @return void
      */
@@ -149,7 +151,7 @@ class BakeShellTest extends TestCase
             'Bake.Project',
             'Bake.Shell',
             'Bake.Test',
-            'Bake.View'
+            'Bake.View',
         ];
         sort($this->Shell->tasks);
         sort($expected);
@@ -157,7 +159,7 @@ class BakeShellTest extends TestCase
     }
 
     /**
-     * Test loading tasks from plugins
+     * Test loading tasks from plugins.
      *
      * @return void
      */

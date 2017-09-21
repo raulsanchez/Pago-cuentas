@@ -1,14 +1,14 @@
 <?php
+
 namespace TestBake\View\Cell;
 
 use Cake\View\Cell;
 
 /**
- * Example cell
+ * Example cell.
  */
-class ExampleCell extends Cell
+class testBakePlugin extends Cell
 {
-
     /**
      * List of valid options that can be passed into this
      * cell's constructor.

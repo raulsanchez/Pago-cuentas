@@ -1,15 +1,18 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Controller;
 
 use Cake\Controller\Controller;
@@ -22,9 +25,8 @@ use Cake\Network\Exception\NotFoundException;
  */
 class PanelsController extends Controller
 {
-
     /**
-     * components
+     * components.
      *
      * @var array
      */
@@ -41,8 +43,10 @@ class PanelsController extends Controller
      * Before filter handler.
      *
      * @param \Cake\Event\Event $event The event.
-     * @return void
+     *
      * @throws \Cake\Network\Exception\NotFoundException
+     *
+     * @return void
      */
     public function beforeFilter(Event $event)
     {
@@ -56,8 +60,10 @@ class PanelsController extends Controller
      * Index method that lets you get requests by panelid.
      *
      * @param string $requestId Request id
-     * @return void
+     *
      * @throws \Cake\Network\Exception\NotFoundException
+     *
+     * @return void
      */
     public function index($requestId = null)
     {
@@ -68,7 +74,7 @@ class PanelsController extends Controller
         }
         $this->set([
             '_serialize' => ['panels'],
-            'panels' => $panels
+            'panels'     => $panels,
         ]);
     }
 
@@ -76,6 +82,7 @@ class PanelsController extends Controller
      * View a panel's data.
      *
      * @param string $id The id.
+     *
      * @return void
      */
     public function view($id = null)

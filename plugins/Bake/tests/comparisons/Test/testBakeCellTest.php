@@ -1,17 +1,17 @@
 <?php
+
 namespace App\Test\TestCase\View\Cell;
 
 use App\View\Cell\ArticlesCell;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\View\Cell\ArticlesCell Test Case
+ * App\View\Cell\ArticlesCell Test Case.
  */
-class ArticlesCellTest extends TestCase
+class testBakeCellTest extends TestCase
 {
-
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
@@ -24,7 +24,7 @@ class ArticlesCellTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -36,7 +36,7 @@ class ArticlesCellTest extends TestCase
     }
 
     /**
-     * Test initial setup
+     * Test initial setup.
      *
      * @return void
      */

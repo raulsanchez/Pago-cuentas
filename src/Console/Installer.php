@@ -1,17 +1,20 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link      http://cakephp.org CakePHP(tm) Project
  * @since     3.0.0
+ *
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Console;
 
 use Composer\Script\Event;
@@ -23,12 +26,13 @@ use Exception;
  */
 class Installer
 {
-
     /**
      * Does some routine installation tasks so people don't have to.
      *
      * @param \Composer\Script\Event $event The composer event object.
+     *
      * @throws \Exception Exception raised by validator.
+     *
      * @return void
      */
     public static function postInstall(Event $event)
@@ -45,6 +49,7 @@ class Installer
                 if (in_array($arg, ['Y', 'y', 'N', 'n'])) {
                     return $arg;
                 }
+
                 throw new Exception('This is not a valid answer. Please choose Y or n.');
             });
             $setFolderPermissions = $io->askAndValidate(
@@ -67,14 +72,15 @@ class Installer
     /**
      * Create the config/app.php file if it does not exist.
      *
-     * @param string $dir The application's root directory.
-     * @param \Composer\IO\IOInterface $io IO interface to write to console.
+     * @param string                   $dir The application's root directory.
+     * @param \Composer\IO\IOInterface $io  IO interface to write to console.
+     *
      * @return void
      */
     public static function createAppConfig($dir, $io)
     {
-        $appConfig = $dir . '/config/app.php';
-        $defaultConfig = $dir . '/config/app.default.php';
+        $appConfig = $dir.'/config/app.php';
+        $defaultConfig = $dir.'/config/app.default.php';
         if (!file_exists($appConfig)) {
             copy($defaultConfig, $appConfig);
             $io->write('Created `config/app.php` file');
@@ -86,8 +92,9 @@ class Installer
      *
      * This is not the most secure default, but it gets people up and running quickly.
      *
-     * @param string $dir The application's root directory.
-     * @param \Composer\IO\IOInterface $io IO interface to write to console.
+     * @param string                   $dir The application's root directory.
+     * @param \Composer\IO\IOInterface $io  IO interface to write to console.
+     *
      * @return void
      */
     public static function setFolderPermissions($dir, $io)
@@ -102,16 +109,16 @@ class Installer
 
             $res = chmod($path, $currentPerms | $perms);
             if ($res) {
-                $io->write('Permissions set on ' . $path);
+                $io->write('Permissions set on '.$path);
             } else {
-                $io->write('Failed to set permissions on ' . $path);
+                $io->write('Failed to set permissions on '.$path);
             }
         };
 
         $walker = function ($dir, $perms, $io) use (&$walker, $changePerms) {
             $files = array_diff(scandir($dir), ['.', '..']);
             foreach ($files as $file) {
-                $path = $dir . '/' . $file;
+                $path = $dir.'/'.$file;
 
                 if (!is_dir($path)) {
                     continue;
@@ -123,34 +130,37 @@ class Installer
         };
 
         $worldWritable = bindec('0000000111');
-        $walker($dir . '/tmp', $worldWritable, $io);
-        $changePerms($dir . '/tmp', $worldWritable, $io);
-        $changePerms($dir . '/logs', $worldWritable, $io);
+        $walker($dir.'/tmp', $worldWritable, $io);
+        $changePerms($dir.'/tmp', $worldWritable, $io);
+        $changePerms($dir.'/logs', $worldWritable, $io);
     }
 
     /**
      * Set the security.salt value in the application's config file.
      *
-     * @param string $dir The application's root directory.
-     * @param \Composer\IO\IOInterface $io IO interface to write to console.
+     * @param string                   $dir The application's root directory.
+     * @param \Composer\IO\IOInterface $io  IO interface to write to console.
+     *
      * @return void
      */
     public static function setSecuritySalt($dir, $io)
     {
-        $config = $dir . '/config/app.php';
+        $config = $dir.'/config/app.php';
         $content = file_get_contents($config);
 
-        $newKey = hash('sha256', $dir . php_uname() . microtime(true));
+        $newKey = hash('sha256', $dir.php_uname().microtime(true));
         $content = str_replace('__SALT__', $newKey, $content, $count);
 
         if ($count == 0) {
             $io->write('No Security.salt placeholder to replace.');
+
             return;
         }
 
         $result = file_put_contents($config, $content);
         if ($result) {
             $io->write('Updated Security.salt value in config/app.php');
+
             return;
         }
         $io->write('Unable to update Security.salt value.');

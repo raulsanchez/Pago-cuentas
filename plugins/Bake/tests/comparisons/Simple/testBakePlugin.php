@@ -1,15 +1,14 @@
 <?php
+
 namespace TestBake\Model\Behavior;
 
 use Cake\ORM\Behavior;
-use Cake\ORM\Table;
 
 /**
- * Example behavior
+ * Example behavior.
  */
-class ExampleBehavior extends Behavior
+class testBakePlugin extends Behavior
 {
-
     /**
      * Default configuration.
      *

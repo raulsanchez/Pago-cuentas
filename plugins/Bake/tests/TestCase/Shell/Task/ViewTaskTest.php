@@ -1,17 +1,20 @@
 <?php
 /**
  * CakePHP : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Test\TestCase\Shell\Task;
 
 use Bake\Shell\Task\TemplateTask;
@@ -22,12 +25,12 @@ use Cake\Core\Plugin;
 use Cake\ORM\TableRegistry;
 
 /**
- * ViewTaskTest class
+ * ViewTaskTest class.
  */
 class ViewTaskTest extends TestCase
 {
     /**
-     * Fixtures
+     * Fixtures.
      *
      * @var array
      */
@@ -42,7 +45,7 @@ class ViewTaskTest extends TestCase
     ];
 
     /**
-     * setUp method
+     * setUp method.
      *
      * Ensure that the default template is used
      *
@@ -51,13 +54,13 @@ class ViewTaskTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->_compareBasePath = Plugin::path('Bake') . 'tests' . DS . 'comparisons' . DS . 'View' . DS;
+        $this->_compareBasePath = Plugin::path('Bake').'tests'.DS.'comparisons'.DS.'View'.DS;
 
         Configure::write('App.namespace', 'Bake\Test\App');
         $this->_setupTask(['in', 'err', 'error', 'createFile', '_stop']);
 
         TableRegistry::get('ViewTaskComments', [
-            'className' => __NAMESPACE__ . '\ViewTaskCommentsTable',
+            'className' => __NAMESPACE__.'\ViewTaskCommentsTable',
         ]);
     }
 
@@ -80,7 +83,7 @@ class ViewTaskTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -110,6 +113,7 @@ class ViewTaskTest extends TestCase
      * Test the controller() method.
      *
      * @dataProvider nameVariations
+     *
      * @return void
      */
     public function testControllerVariations($name)
@@ -159,7 +163,7 @@ class ViewTaskTest extends TestCase
     }
 
     /**
-     * test controller with a non-conventional controller name
+     * test controller with a non-conventional controller name.
      *
      * @return void
      */
@@ -203,7 +207,7 @@ class ViewTaskTest extends TestCase
     }
 
     /**
-     * Test getPath()
+     * Test getPath().
      *
      * @return void
      */
@@ -212,11 +216,11 @@ class ViewTaskTest extends TestCase
         $this->Task->controllerName = 'Posts';
 
         $result = $this->Task->getPath();
-        $this->assertPathEquals(APP . 'Template/Posts/', $result);
+        $this->assertPathEquals(APP.'Template/Posts/', $result);
 
         $this->Task->params['prefix'] = 'admin';
         $result = $this->Task->getPath();
-        $this->assertPathEquals(APP . 'Template/Admin/Posts/', $result);
+        $this->assertPathEquals(APP.'Template/Admin/Posts/', $result);
     }
 
     /**
@@ -228,16 +232,16 @@ class ViewTaskTest extends TestCase
     {
         $this->Task->controllerName = 'Posts';
 
-        $pluginPath = APP . 'Plugin/TestView/';
+        $pluginPath = APP.'Plugin/TestView/';
         Plugin::load('TestView', ['path' => $pluginPath]);
 
         $this->Task->params['plugin'] = $this->Task->plugin = 'TestView';
         $result = $this->Task->getPath();
-        $this->assertPathEquals($pluginPath . 'src/Template/Posts/', $result);
+        $this->assertPathEquals($pluginPath.'src/Template/Posts/', $result);
 
         $this->Task->params['prefix'] = 'admin';
         $result = $this->Task->getPath();
-        $this->assertPathEquals($pluginPath . 'src/Template/Admin/Posts/', $result);
+        $this->assertPathEquals($pluginPath.'src/Template/Admin/Posts/', $result);
 
         Plugin::unload('TestView');
     }
@@ -250,78 +254,78 @@ class ViewTaskTest extends TestCase
     public function testGetContent()
     {
         $vars = [
-            'modelClass' => 'TestViewModel',
-            'schema' => TableRegistry::get('ViewTaskComments')->schema(),
-            'primaryKey' => ['id'],
-            'displayField' => 'name',
-            'singularVar' => 'testViewModel',
-            'pluralVar' => 'testViewModels',
+            'modelClass'        => 'TestViewModel',
+            'schema'            => TableRegistry::get('ViewTaskComments')->schema(),
+            'primaryKey'        => ['id'],
+            'displayField'      => 'name',
+            'singularVar'       => 'testViewModel',
+            'pluralVar'         => 'testViewModels',
             'singularHumanName' => 'Test View Model',
-            'pluralHumanName' => 'Test View Models',
-            'fields' => ['id', 'name', 'body'],
-            'associations' => [],
-            'keyFields' => [],
+            'pluralHumanName'   => 'Test View Models',
+            'fields'            => ['id', 'name', 'body'],
+            'associations'      => [],
+            'keyFields'         => [],
         ];
         $result = $this->Task->getContent('view', $vars);
-        $this->assertSameAsFile(__FUNCTION__ . '.ctp', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.ctp', $result);
     }
 
     /**
-     * Test getContent with associations
+     * Test getContent with associations.
      *
      * @return void
      */
     public function testGetContentAssociations()
     {
         $vars = [
-            'modelClass' => 'ViewTaskComments',
-            'schema' => TableRegistry::get('ViewTaskComments')->schema(),
-            'primaryKey' => ['id'],
-            'displayField' => 'name',
-            'singularVar' => 'viewTaskComment',
-            'pluralVar' => 'viewTaskComments',
+            'modelClass'        => 'ViewTaskComments',
+            'schema'            => TableRegistry::get('ViewTaskComments')->schema(),
+            'primaryKey'        => ['id'],
+            'displayField'      => 'name',
+            'singularVar'       => 'viewTaskComment',
+            'pluralVar'         => 'viewTaskComments',
             'singularHumanName' => 'View Task Comment',
-            'pluralHumanName' => 'View Task Comments',
-            'fields' => ['id', 'name', 'body'],
-            'associations' => [
+            'pluralHumanName'   => 'View Task Comments',
+            'fields'            => ['id', 'name', 'body'],
+            'associations'      => [
                 'belongsTo' => [
                     'Authors' => [
-                        'property' => 'author',
-                        'variable' => 'author',
-                        'primaryKey' => ['id'],
+                        'property'     => 'author',
+                        'variable'     => 'author',
+                        'primaryKey'   => ['id'],
                         'displayField' => 'name',
-                        'foreignKey' => 'author_id',
-                        'alias' => 'Authors',
-                        'controller' => 'ViewTaskAuthors',
-                        'fields' => ['name'],
-                    ]
-                ]
+                        'foreignKey'   => 'author_id',
+                        'alias'        => 'Authors',
+                        'controller'   => 'ViewTaskAuthors',
+                        'fields'       => ['name'],
+                    ],
+                ],
             ],
             'keyFields' => [],
         ];
         $result = $this->Task->getContent('view', $vars);
-        $this->assertSameAsFile(__FUNCTION__ . '.ctp', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.ctp', $result);
     }
 
     /**
-     * Test getContent with no pk
+     * Test getContent with no pk.
      *
      * @return void
      */
     public function testGetContentWithNoPrimaryKey()
     {
         $vars = [
-            'modelClass' => 'TestViewModel',
-            'schema' => TableRegistry::get('ViewTaskComments')->schema(),
-            'primaryKey' => [],
-            'displayField' => 'name',
-            'singularVar' => 'testViewModel',
-            'pluralVar' => 'testViewModels',
+            'modelClass'        => 'TestViewModel',
+            'schema'            => TableRegistry::get('ViewTaskComments')->schema(),
+            'primaryKey'        => [],
+            'displayField'      => 'name',
+            'singularVar'       => 'testViewModel',
+            'pluralVar'         => 'testViewModels',
             'singularHumanName' => 'Test View Model',
-            'pluralHumanName' => 'Test View Models',
-            'fields' => ['id', 'name', 'body'],
-            'associations' => [],
-            'keyFields' => [],
+            'pluralHumanName'   => 'Test View Models',
+            'fields'            => ['id', 'name', 'body'],
+            'associations'      => [],
+            'keyFields'         => [],
         ];
         $this->Task->expects($this->once())
             ->method('error')
@@ -339,28 +343,28 @@ class ViewTaskTest extends TestCase
     public function testGetContentWithRoutingPrefix()
     {
         $vars = [
-            'modelClass' => 'TestViewModel',
-            'schema' => TableRegistry::get('ViewTaskComments')->schema(),
-            'primaryKey' => ['id'],
-            'displayField' => 'name',
-            'singularVar' => 'testViewModel',
-            'pluralVar' => 'testViewModels',
+            'modelClass'        => 'TestViewModel',
+            'schema'            => TableRegistry::get('ViewTaskComments')->schema(),
+            'primaryKey'        => ['id'],
+            'displayField'      => 'name',
+            'singularVar'       => 'testViewModel',
+            'pluralVar'         => 'testViewModels',
             'singularHumanName' => 'Test View Model',
-            'pluralHumanName' => 'Test View Models',
-            'fields' => ['id', 'name', 'body'],
-            'keyFields' => [],
-            'associations' => []
+            'pluralHumanName'   => 'Test View Models',
+            'fields'            => ['id', 'name', 'body'],
+            'keyFields'         => [],
+            'associations'      => [],
         ];
         $this->Task->params['prefix'] = 'Admin';
         $result = $this->Task->getContent('view', $vars);
-        $this->assertSameAsFile(__FUNCTION__ . '-view.ctp', $result);
+        $this->assertSameAsFile(__FUNCTION__.'-view.ctp', $result);
 
         $result = $this->Task->getContent('add', $vars);
-        $this->assertSameAsFile(__FUNCTION__ . '-add.ctp', $result);
+        $this->assertSameAsFile(__FUNCTION__.'-add.ctp', $result);
     }
 
     /**
-     * test Bake method
+     * test Bake method.
      *
      * @return void
      */
@@ -368,20 +372,20 @@ class ViewTaskTest extends TestCase
     {
         $this->Task->controllerName = 'ViewTaskComments';
         $this->Task->modelName = 'ViewTaskComments';
-        $this->Task->controllerClass = __NAMESPACE__ . '\ViewTaskCommentsController';
+        $this->Task->controllerClass = __NAMESPACE__.'\ViewTaskCommentsController';
 
         $this->Task->expects($this->at(0))
             ->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Template/ViewTaskComments/view.ctp')
+                $this->_normalizePath(APP.'Template/ViewTaskComments/view.ctp')
             );
 
         $result = $this->Task->bake('view', true);
-        $this->assertSameAsFile(__FUNCTION__ . '.ctp', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.ctp', $result);
     }
 
     /**
-     * test baking an edit file
+     * test baking an edit file.
      *
      * @return void
      */
@@ -389,18 +393,18 @@ class ViewTaskTest extends TestCase
     {
         $this->Task->controllerName = 'ViewTaskComments';
         $this->Task->modelName = 'ViewTaskComments';
-        $this->Task->controllerClass = __NAMESPACE__ . '\ViewTaskCommentsController';
+        $this->Task->controllerClass = __NAMESPACE__.'\ViewTaskCommentsController';
 
         $this->Task->expects($this->at(0))->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Template/ViewTaskComments/edit.ctp')
+                $this->_normalizePath(APP.'Template/ViewTaskComments/edit.ctp')
             );
         $result = $this->Task->bake('edit', true);
-        $this->assertSameAsFile(__FUNCTION__ . '.ctp', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.ctp', $result);
     }
 
     /**
-     * test baking an index
+     * test baking an index.
      *
      * @return void
      */
@@ -408,18 +412,18 @@ class ViewTaskTest extends TestCase
     {
         $this->Task->controllerName = 'ViewTaskComments';
         $this->Task->modelName = 'ViewTaskComments';
-        $this->Task->controllerClass = __NAMESPACE__ . '\ViewTaskCommentsController';
+        $this->Task->controllerClass = __NAMESPACE__.'\ViewTaskCommentsController';
 
         $this->Task->expects($this->at(0))->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Template/ViewTaskComments/index.ctp')
+                $this->_normalizePath(APP.'Template/ViewTaskComments/index.ctp')
             );
         $result = $this->Task->bake('index', true);
-        $this->assertSameAsFile(__FUNCTION__ . '.ctp', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.ctp', $result);
     }
 
     /**
-     * test Bake with plugins
+     * test Bake with plugins.
      *
      * @return void
      */
@@ -427,14 +431,14 @@ class ViewTaskTest extends TestCase
     {
         $this->Task->controllerName = 'ViewTaskComments';
         $this->Task->modelName = 'BakeTest.BakeTestComments';
-        $this->Task->controllerClass = __NAMESPACE__ . '\ViewTaskCommentsController';
+        $this->Task->controllerClass = __NAMESPACE__.'\ViewTaskCommentsController';
         $table = TableRegistry::get('BakeTest.BakeTestComments');
         $table->belongsTo('Articles');
 
         $this->Task->expects($this->at(0))
             ->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Template/ViewTaskComments/index.ctp'),
+                $this->_normalizePath(APP.'Template/ViewTaskComments/index.ctp'),
                 $this->stringContains('$viewTaskComment->article->id')
             );
 
@@ -455,7 +459,7 @@ class ViewTaskTest extends TestCase
         $this->Task->expects($this->once())
             ->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Template/CategoryThreads/index.ctp'),
+                $this->_normalizePath(APP.'Template/CategoryThreads/index.ctp'),
                 $this->logicalNot($this->stringContains('ParentCategoryThread'))
             );
 
@@ -471,7 +475,7 @@ class ViewTaskTest extends TestCase
     {
         $this->Task->controllerName = 'ViewTaskComments';
         $this->Task->modelName = 'ViewTaskComments';
-        $this->Task->controllerClass = __NAMESPACE__ . '\ViewTaskCommentsController';
+        $this->Task->controllerClass = __NAMESPACE__.'\ViewTaskCommentsController';
 
         $this->Task->expects($this->never())->method('createFile');
         $this->Task->bake('delete', true);
@@ -486,22 +490,22 @@ class ViewTaskTest extends TestCase
     {
         $this->Task->controllerName = 'ViewTaskComments';
         $this->Task->modelName = 'ViewTaskComments';
-        $this->Task->controllerClass = __NAMESPACE__ . '\ViewTaskCommentsController';
+        $this->Task->controllerClass = __NAMESPACE__.'\ViewTaskCommentsController';
 
         $this->Task->expects($this->at(0))
             ->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Template/ViewTaskComments/view.ctp'),
+                $this->_normalizePath(APP.'Template/ViewTaskComments/view.ctp'),
                 $this->stringContains('View Task Comments')
             );
         $this->Task->expects($this->at(1))->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Template/ViewTaskComments/edit.ctp'),
+                $this->_normalizePath(APP.'Template/ViewTaskComments/edit.ctp'),
                 $this->stringContains('Edit View Task Comment')
             );
         $this->Task->expects($this->at(2))->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Template/ViewTaskComments/index.ctp'),
+                $this->_normalizePath(APP.'Template/ViewTaskComments/index.ctp'),
                 $this->stringContains('ViewTaskComment')
             );
 
@@ -509,7 +513,7 @@ class ViewTaskTest extends TestCase
     }
 
     /**
-     * test baking a customAction (non crud)
+     * test baking a customAction (non crud).
      *
      * @return void
      */
@@ -517,14 +521,14 @@ class ViewTaskTest extends TestCase
     {
         $this->Task->controllerName = 'ViewTaskComments';
         $this->Task->modelName = 'ViewTaskComments';
-        $this->Task->controllerClass = __NAMESPACE__ . '\ViewTaskCommentsController';
+        $this->Task->controllerClass = __NAMESPACE__.'\ViewTaskCommentsController';
 
         $this->Task->expects($this->any())->method('in')
             ->will($this->onConsecutiveCalls('', 'my_action', 'y'));
 
         $this->Task->expects($this->once())->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Template/ViewTaskComments/my_action.ctp')
+                $this->_normalizePath(APP.'Template/ViewTaskComments/my_action.ctp')
             );
 
         $this->Task->customAction();
@@ -550,7 +554,7 @@ class ViewTaskTest extends TestCase
     }
 
     /**
-     * Test all() calls execute
+     * Test all() calls execute.
      *
      * @return void
      */
@@ -575,7 +579,7 @@ class ViewTaskTest extends TestCase
     }
 
     /**
-     * test `cake bake view $controller view`
+     * test `cake bake view $controller view`.
      *
      * @return void
      */
@@ -633,10 +637,10 @@ class ViewTaskTest extends TestCase
 
         $this->Task->connection = 'test';
         $filename = $this->_normalizePath(
-            APP . 'Plugin/TestView/src/Template/ViewTaskComments/index.ctp'
+            APP.'Plugin/TestView/src/Template/ViewTaskComments/index.ctp'
         );
 
-        Plugin::load('TestView', ['path' => APP . 'Plugin/TestView/']);
+        Plugin::load('TestView', ['path' => APP.'Plugin/TestView/']);
 
         $this->Task->expects($this->at(0))
             ->method('createFile')
@@ -645,7 +649,7 @@ class ViewTaskTest extends TestCase
     }
 
     /**
-     * static dataprovider for test cases
+     * static dataprovider for test cases.
      *
      * @return void
      */
@@ -655,7 +659,7 @@ class ViewTaskTest extends TestCase
     }
 
     /**
-     * test `cake bake view $table --controller Blog`
+     * test `cake bake view $table --controller Blog`.
      *
      * @return void
      */
@@ -670,14 +674,14 @@ class ViewTaskTest extends TestCase
         foreach ($views as $i => $view) {
             $this->Task->expects($this->at($i))->method('createFile')
                 ->with(
-                    $this->_normalizePath(APP . 'Template/Blog/' . $view)
+                    $this->_normalizePath(APP.'Template/Blog/'.$view)
                 );
         }
         $this->Task->main('Posts');
     }
 
     /**
-     * test `cake bake view $controller --prefix Admin`
+     * test `cake bake view $controller --prefix Admin`.
      *
      * @return void
      */
@@ -692,14 +696,14 @@ class ViewTaskTest extends TestCase
         foreach ($views as $i => $view) {
             $this->Task->expects($this->at($i))->method('createFile')
                 ->with(
-                    $this->_normalizePath(APP . 'Template/Admin/Posts/' . $view)
+                    $this->_normalizePath(APP.'Template/Admin/Posts/'.$view)
                 );
         }
         $this->Task->main('Posts');
     }
 
     /**
-     * test `cake bake view posts index list`
+     * test `cake bake view posts index list`.
      *
      * @return void
      */

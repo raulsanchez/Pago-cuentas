@@ -1,17 +1,20 @@
 <?php
 /**
  * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://book.cakephp.org/2.0/en/development/testing.html CakePHP(tm) Tests
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Test\TestCase\View;
 
 use Bake\View\BakeView;
@@ -23,22 +26,21 @@ use Cake\TestSuite\StringCompareTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * BakeViewTest class
- *
+ * BakeViewTest class.
  */
 class BakeViewTest extends TestCase
 {
     use StringCompareTrait;
 
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
     public function setUp()
     {
         parent::setUp();
-        $this->_compareBasePath = Plugin::path('Bake') . 'tests' . DS . 'comparisons' . DS . 'BakeView' . DS;
+        $this->_compareBasePath = Plugin::path('Bake').'tests'.DS.'comparisons'.DS.'BakeView'.DS;
 
         $request = new Request();
         $response = new Response();
@@ -46,12 +48,12 @@ class BakeViewTest extends TestCase
 
         Configure::write(
             'App.paths.templates.x',
-            Plugin::path('Bake') . 'tests' . DS . 'test_app' . DS . 'App' . DS . 'Template' . DS
+            Plugin::path('Bake').'tests'.DS.'test_app'.DS.'App'.DS.'Template'.DS
         );
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -62,7 +64,7 @@ class BakeViewTest extends TestCase
     }
 
     /**
-     * test rendering a template file
+     * test rendering a template file.
      *
      * @return void
      */
@@ -76,7 +78,7 @@ class BakeViewTest extends TestCase
     }
 
     /**
-     * verify that php tags are ignored
+     * verify that php tags are ignored.
      *
      * @return void
      */
@@ -90,7 +92,7 @@ class BakeViewTest extends TestCase
     }
 
     /**
-     * verify that short php tags are ignored
+     * verify that short php tags are ignored.
      *
      * @return void
      */
@@ -104,7 +106,7 @@ class BakeViewTest extends TestCase
     }
 
     /**
-     * Newlines after template tags should act predictably
+     * Newlines after template tags should act predictably.
      *
      * @return void
      */
@@ -114,7 +116,7 @@ class BakeViewTest extends TestCase
         $expected = "There should be a newline about here: \n";
         $expected .= "And this should be on the next line.\n";
         $expected .= "\n";
-        $expected .= "There should be no new line after this";
+        $expected .= 'There should be no new line after this';
 
         $this->assertSame(
             $expected,
@@ -124,13 +126,13 @@ class BakeViewTest extends TestCase
     }
 
     /**
-     * Verify that template tags with leading whitespace don't leave a mess
+     * Verify that template tags with leading whitespace don't leave a mess.
      *
      * @return void
      */
     public function testSwallowLeadingWhitespace()
     {
         $result = $this->View->render('leading_whitespace');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 }

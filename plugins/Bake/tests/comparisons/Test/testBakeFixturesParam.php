@@ -1,29 +1,28 @@
 <?php
+
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\ArticlesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\ArticlesTable Test Case
+ * App\Model\Table\ArticlesTable Test Case.
  */
-class ArticlesTableTest extends TestCase
+class testBakeFixturesParam extends TestCase
 {
-
     /**
-     * Fixtures
+     * Fixtures.
      *
      * @var array
      */
     public $fixtures = [
         'app.posts',
         'app.comments',
-        'app.users'
+        'app.users',
     ];
 
     /**
-     * setUp method
+     * setUp method.
      *
      * @return void
      */
@@ -35,7 +34,7 @@ class ArticlesTableTest extends TestCase
     }
 
     /**
-     * tearDown method
+     * tearDown method.
      *
      * @return void
      */
@@ -47,7 +46,7 @@ class ArticlesTableTest extends TestCase
     }
 
     /**
-     * Test initial setup
+     * Test initial setup.
      *
      * @return void
      */

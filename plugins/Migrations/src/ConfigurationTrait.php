@@ -1,14 +1,17 @@
 <?php
 /**
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Migrations;
 
 use Cake\Core\Plugin;
@@ -27,16 +30,15 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 trait ConfigurationTrait
 {
-
     /**
-     * The configuration object that phinx uses for connecting to the database
+     * The configuration object that phinx uses for connecting to the database.
      *
      * @var Phinx\Config\Config
      */
     protected $configuration;
 
     /**
-     * The console input instance
+     * The console input instance.
      *
      * @var Symfony\Component\Console\Input\Input
      */
@@ -59,20 +61,20 @@ trait ConfigurationTrait
             $folder = $this->input->getOption('source');
         }
 
-        $dir = ROOT . DS . 'config' . DS . $folder;
+        $dir = ROOT.DS.'config'.DS.$folder;
         $plugin = null;
 
         if ($this->input->getOption('plugin')) {
             $plugin = $this->input->getOption('plugin');
-            $dir = Plugin::path($plugin) . 'config' . DS . $folder;
+            $dir = Plugin::path($plugin).'config'.DS.$folder;
         }
 
         if (!is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
 
-        $plugin = $plugin ? Inflector::underscore($plugin) . '_' : '';
-        $plugin = str_replace(array('\\', '/', '.'), '_', $plugin);
+        $plugin = $plugin ? Inflector::underscore($plugin).'_' : '';
+        $plugin = str_replace(['\\', '/', '.'], '_', $plugin);
 
         $connection = 'default';
         if ($this->input->getOption('connection')) {
@@ -80,23 +82,24 @@ trait ConfigurationTrait
         }
 
         $config = ConnectionManager::config($connection);
+
         return $this->configuration = new Config([
             'paths' => [
-                'migrations' => $dir
+                'migrations' => $dir,
             ],
             'environments' => [
-                'default_migration_table' => $plugin . 'phinxlog',
-                'default_database' => 'default',
-                'default' => [
+                'default_migration_table' => $plugin.'phinxlog',
+                'default_database'        => 'default',
+                'default'                 => [
                     'adapter' => $this->getAdapterName($config['driver']),
-                    'host' => isset($config['host']) ? $config['host'] : null,
-                    'user' => isset($config['username']) ? $config['username'] : null,
-                    'pass' => isset($config['password']) ? $config['password'] : null,
-                    'port' => isset($config['port']) ? $config['port'] : null,
-                    'name' => $config['database'],
-                    'charset' => $config['encoding']
-                ]
-            ]
+                    'host'    => isset($config['host']) ? $config['host'] : null,
+                    'user'    => isset($config['username']) ? $config['username'] : null,
+                    'pass'    => isset($config['password']) ? $config['password'] : null,
+                    'port'    => isset($config['port']) ? $config['port'] : null,
+                    'name'    => $config['database'],
+                    'charset' => $config['encoding'],
+                ],
+            ],
         ]);
     }
 
@@ -105,9 +108,11 @@ trait ConfigurationTrait
      * that was configured for the configuration.
      *
      * @param string $driver The driver name as configured for the CakePHP app.
-     * @return Phinx\Config\Config
+     *
      * @throws \InvalidArgumentexception when it was not possible to infer the information
-     * out of the provided database configuration
+     *                                   out of the provided database configuration
+     *
+     * @return Phinx\Config\Config
      */
     public function getAdapterName($driver)
     {
@@ -131,10 +136,11 @@ trait ConfigurationTrait
 
     /**
      * Overrides the action execute method in order to vanish the idea of environments
-     * from phinx. CakePHP does not beleive in the idea of having in-app environments
+     * from phinx. CakePHP does not beleive in the idea of having in-app environments.
      *
-     * @param Symfony\Component\Console\Input\Inputnterface $input the input object
+     * @param Symfony\Component\Console\Input\Inputnterface   $input  the input object
      * @param Symfony\Component\Console\Input\OutputInterface $output the output object
+     *
      * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -150,6 +156,7 @@ trait ConfigurationTrait
      * is used to inspect the extra options that are needed for CakePHP apps.
      *
      * @param Symfony\Component\Console\Input\Inputnterface $input the input object
+     *
      * @return void
      */
     public function setInput(InputInterface $input)
@@ -162,8 +169,9 @@ trait ConfigurationTrait
      * the CakePHP connection. This is needed in case the user decides to use tables
      * from the ORM and executes queries.
      *
-     * @param Symfony\Component\Console\Input\Inputnterface $input the input object
+     * @param Symfony\Component\Console\Input\Inputnterface   $input  the input object
      * @param Symfony\Component\Console\Input\OutputInterface $output the output object
+     *
      * @return void
      */
     public function bootstrap(InputInterface $input, OutputInterface $output)

@@ -11,10 +11,12 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         2.0.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-include dirname(__DIR__) . '/config/bootstrap.php';
+include dirname(__DIR__).'/config/bootstrap.php';
 
 exit(Cake\Console\ShellDispatcher::run($argv));

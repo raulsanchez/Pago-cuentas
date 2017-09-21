@@ -1,16 +1,19 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         3.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Database\Log;
 
 use Cake\Database\Log\LoggedQuery;
@@ -25,7 +28,6 @@ use Cake\Database\Log\QueryLogger;
  */
 class DebugLog extends QueryLogger
 {
-
     /**
      * Logs from the current request.
      *
@@ -48,24 +50,24 @@ class DebugLog extends QueryLogger
     protected $_connectionName;
 
     /**
-     * Total time (ms) of all queries
+     * Total time (ms) of all queries.
      *
      * @var int
      */
     protected $_totalTime = 0;
 
     /**
-     * Total rows of all queries
+     * Total rows of all queries.
      *
      * @var int
      */
     protected $_totalRows = 0;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Cake\Database\Log\QueryLogger $logger The logger to decorate and spy on.
-     * @param string $name The name of the connection being logged.
+     * @param string                        $name   The name of the connection being logged.
      */
     public function __construct($logger, $name)
     {
@@ -94,7 +96,7 @@ class DebugLog extends QueryLogger
     }
 
     /**
-     * Get the total time
+     * Get the total time.
      *
      * @return int
      */
@@ -104,7 +106,7 @@ class DebugLog extends QueryLogger
     }
 
     /**
-     * Get the total rows
+     * Get the total rows.
      *
      * @return int
      */
@@ -114,9 +116,10 @@ class DebugLog extends QueryLogger
     }
 
     /**
-     * Log queries
+     * Log queries.
      *
      * @param \Cake\Database\Log\LoggedQuery $query The query being logged.
+     *
      * @return void
      */
     public function log(LoggedQuery $query)
@@ -132,8 +135,8 @@ class DebugLog extends QueryLogger
 
         $this->_queries[] = [
             'query' => $query->query,
-            'took' => $query->took,
-            'rows' => $query->numRows
+            'took'  => $query->took,
+            'rows'  => $query->numRows,
         ];
     }
 }

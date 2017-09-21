@@ -1,16 +1,19 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         DebugKit 1.3
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Test\TestCase\Model\Behavior;
 
 use Cake\ORM\TableRegistry;
@@ -18,20 +21,19 @@ use Cake\TestSuite\TestCase;
 use DebugKit\DebugTimer;
 
 /**
- * Class TimedBehaviorTestCase
+ * Class TimedBehaviorTestCase.
  */
 class TimedBehaviorTest extends TestCase
 {
-
     /**
-     * Fixtures
+     * Fixtures.
      *
      * @var array
      */
     public $fixtures = ['core.articles'];
 
     /**
-     * Start Test callback
+     * Start Test callback.
      *
      * @return void
      */
@@ -43,7 +45,7 @@ class TimedBehaviorTest extends TestCase
     }
 
     /**
-     * End a test
+     * End a test.
      *
      * @return void
      */
@@ -56,7 +58,7 @@ class TimedBehaviorTest extends TestCase
     }
 
     /**
-     * Test find timers
+     * Test find timers.
      *
      * @return void
      */
@@ -75,7 +77,7 @@ class TimedBehaviorTest extends TestCase
     }
 
     /**
-     * Test save timers
+     * Test save timers.
      *
      * @return void
      */

@@ -1,15 +1,18 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Controller;
 
 use Cake\Cache\Cache;
@@ -23,16 +26,15 @@ use Cake\Network\Exception\NotFoundException;
  */
 class ToolbarController extends Controller
 {
-
     /**
-     * components
+     * components.
      *
      * @var array
      */
     public $components = ['RequestHandler'];
 
     /**
-     * View class
+     * View class.
      *
      * @var string
      */
@@ -42,8 +44,10 @@ class ToolbarController extends Controller
      * Before filter handler.
      *
      * @param \Cake\Event\Event $event The event.
-     * @return void
+     *
      * @throws \Cake\Network\Exception\NotFoundException
+     *
+     * @return void
      */
     public function beforeFilter(Event $event)
     {
@@ -56,8 +60,9 @@ class ToolbarController extends Controller
     /**
      * Clear a named cache.
      *
-     * @return void
      * @throws \Cake\Network\Exception\NotFoundException
+     *
+     * @return void
      */
     public function clearCache()
     {
@@ -68,7 +73,7 @@ class ToolbarController extends Controller
         $result = Cache::clear(false, $this->request->data('name'));
         $this->set([
             '_serialize' => ['success'],
-            'success' => $result,
+            'success'    => $result,
         ]);
     }
 }

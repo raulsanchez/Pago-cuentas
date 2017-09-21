@@ -1,17 +1,20 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Shell;
 
 use Cake\Cache\Cache;
@@ -65,7 +68,7 @@ class BakeShell extends Shell
     }
 
     /**
-     * Override main() to handle action
+     * Override main() to handle action.
      *
      * @return mixed
      */
@@ -75,6 +78,7 @@ class BakeShell extends Shell
         if (empty($connections)) {
             $this->out('Your database configuration was not found.');
             $this->out('Add your database connection information to config/app.php.');
+
             return false;
         }
         $this->out('The following commands can be used to generate skeleton code for your application.', 2);
@@ -82,10 +86,11 @@ class BakeShell extends Shell
         $this->out('- all');
         foreach ($this->tasks as $task) {
             list(, $name) = pluginSplit($task);
-            $this->out('- ' . Inflector::underscore($name));
+            $this->out('- '.Inflector::underscore($name));
         }
         $this->out('');
         $this->out('By using <info>`cake bake [name]`</info> you can invoke a specific bake task.');
+
         return false;
     }
 
@@ -122,10 +127,11 @@ class BakeShell extends Shell
     /**
      * Append matching tasks in $path to the $tasks array.
      *
-     * @param array $tasks The task list to modify and return.
-     * @param string $path The base path to look in.
-     * @param string $namespace The base namespace.
-     * @param string|null $prefix The prefix to append.
+     * @param array       $tasks     The task list to modify and return.
+     * @param string      $path      The base path to look in.
+     * @param string      $namespace The base namespace.
+     * @param string|null $prefix    The prefix to append.
+     *
      * @return array Updated tasks.
      */
     protected function _findTasks($tasks, $path, $namespace, $prefix = null)
@@ -139,17 +145,19 @@ class BakeShell extends Shell
         foreach ($classes as $class) {
             list(, $name) = namespaceSplit($class);
             $name = substr($name, 0, -4);
-            $fullName = ($prefix ? $prefix . '.' : '') . $name;
+            $fullName = ($prefix ? $prefix.'.' : '').$name;
             $tasks[$name] = $fullName;
         }
+
         return $tasks;
     }
 
     /**
      * Find task classes in a given path.
      *
-     * @param string $path The path to scan.
+     * @param string $path      The path to scan.
      * @param string $namespace Namespace.
+     *
      * @return array An array of files that may contain bake tasks.
      */
     protected function _findClassFiles($path, $namespace)
@@ -161,8 +169,9 @@ class BakeShell extends Shell
                 continue;
             }
             $name = $item->getBasename('.php');
-            $candidates[] = $namespace . '\Shell\Task\\' . $name;
+            $candidates[] = $namespace.'\Shell\Task\\'.$name;
         }
+
         return $candidates;
     }
 
@@ -170,6 +179,7 @@ class BakeShell extends Shell
      * Find bake tasks in a given set of files.
      *
      * @param array $files The array of files.
+     *
      * @return array An array of matching classes.
      */
     protected function _findTaskClasses($files)
@@ -188,13 +198,15 @@ class BakeShell extends Shell
             }
             $classes[] = $className;
         }
+
         return $classes;
     }
 
     /**
-     * Quickly bake the MVC
+     * Quickly bake the MVC.
      *
      * @param string|null $name Name.
+     *
      * @return void
      */
     public function all($name = null)
@@ -210,9 +222,10 @@ class BakeShell extends Shell
             $this->Model->connection = $this->connection;
             $this->out('Possible model names based on your database:');
             foreach ($this->Model->listAll() as $table) {
-                $this->out('- ' . $table);
+                $this->out('- '.$table);
             }
             $this->out('Run <info>`cake bake all [name]`</info> to generate skeleton files.');
+
             return false;
         }
 
@@ -228,6 +241,7 @@ class BakeShell extends Shell
         $this->View->main($name);
 
         $this->out('<success>Bake All complete.</success>', 1, Shell::QUIET);
+
         return true;
     }
 
@@ -243,33 +257,33 @@ class BakeShell extends Shell
         $bakeThemes = [];
         foreach (Plugin::loaded() as $plugin) {
             $path = Plugin::classPath($plugin);
-            if (is_dir($path . 'Template' . DS . 'Bake')) {
+            if (is_dir($path.'Template'.DS.'Bake')) {
                 $bakeThemes[] = $plugin;
             }
         }
 
         $parser->description(
-            'The Bake script generates controllers, views and models for your application.' .
-            ' If run with no command line arguments, Bake guides the user through the class creation process.' .
-            ' You can customize the generation process by telling Bake where different parts of your application' .
+            'The Bake script generates controllers, views and models for your application.'.
+            ' If run with no command line arguments, Bake guides the user through the class creation process.'.
+            ' You can customize the generation process by telling Bake where different parts of your application'.
             ' are using command line arguments.'
         )->addSubcommand('all', [
             'help' => 'Bake a complete MVC skeleton.',
         ])->addOption('connection', [
-            'help' => 'Database connection to use in conjunction with `bake all`.',
-            'short' => 'c',
-            'default' => 'default'
+            'help'    => 'Database connection to use in conjunction with `bake all`.',
+            'short'   => 'c',
+            'default' => 'default',
         ])->addOption('theme', [
-            'short' => 't',
-            'help' => 'The theme to use when baking code.',
-            'choices' => $bakeThemes
+            'short'   => 't',
+            'help'    => 'The theme to use when baking code.',
+            'choices' => $bakeThemes,
         ]);
 
         foreach ($this->_taskMap as $task => $config) {
             $taskParser = $this->{$task}->getOptionParser();
             $parser->addSubcommand(Inflector::underscore($task), [
-                'help' => $taskParser->description(),
-                'parser' => $taskParser
+                'help'   => $taskParser->description(),
+                'parser' => $taskParser,
             ]);
         }
 

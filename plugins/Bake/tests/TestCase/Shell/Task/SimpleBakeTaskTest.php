@@ -1,17 +1,20 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Test\TestCase\Shell\Task;
 
 use Bake\Shell\Task\TemplateTask;
@@ -20,19 +23,19 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 
 /**
- * SimpleBakeTaskTest class
+ * SimpleBakeTaskTest class.
  */
 class SimpleBakeTaskTest extends TestCase
 {
     /**
-     * setup method
+     * setup method.
      *
      * @return void
      */
     public function setUp()
     {
         parent::setUp();
-        $this->_compareBasePath = Plugin::path('Bake') . 'tests' . DS . 'comparisons' . DS . 'Simple' . DS;
+        $this->_compareBasePath = Plugin::path('Bake').'tests'.DS.'comparisons'.DS.'Simple'.DS;
         $io = $this->getMock('Cake\Console\ConsoleIo', [], [], '', false);
 
         $this->Task = $this->getMock(
@@ -74,7 +77,7 @@ class SimpleBakeTaskTest extends TestCase
         $this->Task->expects($this->once())
             ->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Model/Behavior/ExampleBehavior.php'),
+                $this->_normalizePath(APP.'Model/Behavior/ExampleBehavior.php'),
                 $this->stringContains('class ExampleBehavior extends Behavior')
             );
         $this->Task->Test->expects($this->once())
@@ -91,8 +94,8 @@ class SimpleBakeTaskTest extends TestCase
      */
     public function testMainWithPlugin()
     {
-        Plugin::load('SimpleBakeTest', ['path' => APP . 'Plugin' . DS . 'SimpleBakeTest' . DS]);
-        $filename = $this->_normalizePath(APP . 'Plugin/SimpleBakeTest/src/Model/Behavior/ExampleBehavior.php');
+        Plugin::load('SimpleBakeTest', ['path' => APP.'Plugin'.DS.'SimpleBakeTest'.DS]);
+        $filename = $this->_normalizePath(APP.'Plugin/SimpleBakeTest/src/Model/Behavior/ExampleBehavior.php');
         $this->Task->expects($this->once())
             ->method('createFile')
             ->with(
@@ -118,16 +121,16 @@ class SimpleBakeTaskTest extends TestCase
         $this->Task->expects($this->once())
             ->method('createFile')
             ->with(
-                $this->_normalizePath(APP . 'Model/Behavior/ExampleBehavior.php'),
+                $this->_normalizePath(APP.'Model/Behavior/ExampleBehavior.php'),
                 $this->stringContains('class ExampleBehavior extends Behavior')
             );
 
         $result = $this->Task->bake('Example');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
-     * Test bakeTest
+     * Test bakeTest.
      *
      * @return void
      */
@@ -171,12 +174,12 @@ class SimpleBakeTaskTest extends TestCase
         $this->Task->expects($this->once())
             ->method('createFile')
             ->with(
-                $this->_normalizePath($path . 'src/Model/Behavior/ExampleBehavior.php'),
+                $this->_normalizePath($path.'src/Model/Behavior/ExampleBehavior.php'),
                 $this->stringContains('class ExampleBehavior extends Behavior')
             );
 
         $result = $this->Task->bake('Example');
-        $this->assertSameAsFile(__FUNCTION__ . '.php', $result);
+        $this->assertSameAsFile(__FUNCTION__.'.php', $result);
     }
 
     /**
@@ -198,6 +201,7 @@ class SimpleBakeTaskTest extends TestCase
      * Test that the various implementations are sane.
      *
      * @dataProvider subclassProvider
+     *
      * @return void
      */
     public function testImplementations($class)

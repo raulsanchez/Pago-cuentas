@@ -1,23 +1,22 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         DebugKit 0.1
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\View\Helper;
 
-use Cake\Cache\Cache;
-use Cake\Datasource\ConnectionManager;
-use Cake\Event\Event;
 use Cake\View\Helper;
-use DebugKit\DebugKitDebugger;
 
 /**
  * Provides Base methods for content specific debug toolbar helpers.
@@ -27,23 +26,23 @@ use DebugKit\DebugKitDebugger;
  */
 class ToolbarHelper extends Helper
 {
-
     /**
-     * helpers property
+     * helpers property.
      *
      * @var array
      */
-    public $helpers = array('Html', 'Form', 'Url');
+    public $helpers = ['Html', 'Form', 'Url'];
 
     /**
      * Recursively goes through an array and makes neat HTML out of it.
      *
-     * @param mixed $values Array to make pretty.
-     * @param int $openDepth Depth to add open class
-     * @param int $currentDepth current depth.
-     * @param bool $doubleEncode Whether or not to double encode.
+     * @param mixed             $values           Array to make pretty.
+     * @param int               $openDepth        Depth to add open class
+     * @param int               $currentDepth     current depth.
+     * @param bool              $doubleEncode     Whether or not to double encode.
      * @param \SplObjectStorage $currentAncestors Object references found down
-     * the path.
+     *                                            the path.
+     *
      * @return string
      */
     public function makeNeatArray($values, $openDepth = 0, $currentDepth = 0, $doubleEncode = false, \SplObjectStorage $currentAncestors = null)
@@ -65,10 +64,10 @@ class ToolbarHelper extends Helper
         $out = "<ul class=\"$className\">";
         if (!is_array($values)) {
             if (is_bool($values)) {
-                $values = array($values);
+                $values = [$values];
             }
             if ($values === null) {
-                $values = array(null);
+                $values = [null];
             }
             if (is_object($values) && method_exists($values, 'toArray')) {
                 $values = $values->toArray();
@@ -78,7 +77,7 @@ class ToolbarHelper extends Helper
             $values[] = '(empty)';
         }
         foreach ($values as $key => $value) {
-            $out .= '<li><strong>' . $key . '</strong>';
+            $out .= '<li><strong>'.$key.'</strong>';
             if (is_array($value) && count($value) > 0) {
                 $out .= '(array)';
             } elseif (is_object($value)) {
@@ -121,6 +120,7 @@ class ToolbarHelper extends Helper
             $out .= '</li>';
         }
         $out .= '</ul>';
+
         return $out;
     }
 }

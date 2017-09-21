@@ -1,17 +1,20 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         0.1.0
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Bake\Shell\Task;
 
 use Cake\Cache\Cache;
@@ -23,7 +26,6 @@ use Cake\Filesystem\File;
 
 /**
  * Base class for Bake Tasks.
- *
  */
 class BakeTask extends Shell
 {
@@ -37,14 +39,14 @@ class BakeTask extends Shell
     public $pathFragment;
 
     /**
-     * Name of plugin
+     * Name of plugin.
      *
      * @var string
      */
     public $plugin = null;
 
     /**
-     * The db connection being used for baking
+     * The db connection being used for baking.
      *
      * @var string
      */
@@ -84,16 +86,17 @@ class BakeTask extends Shell
      */
     public function getPath()
     {
-        $path = APP . $this->pathFragment;
+        $path = APP.$this->pathFragment;
         if (isset($this->plugin)) {
-            $path = $this->_pluginPath($this->plugin) . 'src/' . $this->pathFragment;
+            $path = $this->_pluginPath($this->plugin).'src/'.$this->pathFragment;
         }
+
         return str_replace('/', DS, $path);
     }
 
     /**
      * Base execute method parses some parameters and sets some properties on the bake tasks.
-     * call when overriding execute()
+     * call when overriding execute().
      *
      * @return void
      */
@@ -111,20 +114,22 @@ class BakeTask extends Shell
     }
 
     /**
-     * Executes an external shell command and pipes its output to the stdout
+     * Executes an external shell command and pipes its output to the stdout.
      *
      * @param string $command the command to execute
-     * @return void
+     *
      * @throws \RuntimeException if any errors occurred during the execution
+     *
+     * @return void
      */
     public function callProcess($command)
     {
         $descriptorSpec = [
             0 => ['pipe', 'r'],
             1 => ['pipe', 'w'],
-            2 => ['pipe', 'w']
+            2 => ['pipe', 'w'],
         ];
-        $this->_io->verbose('Running ' . $command);
+        $this->_io->verbose('Running '.$command);
         $process = proc_open(
             $command,
             $descriptorSpec,
@@ -132,6 +137,7 @@ class BakeTask extends Shell
         );
         if (!is_resource($process)) {
             $this->error('Could not start subprocess.');
+
             return false;
         }
         fclose($pipes[0]);
@@ -156,6 +162,7 @@ class BakeTask extends Shell
      * Sets the plugin parameter and plugin property.
      *
      * @param string $name The name to possibly split.
+     *
      * @return string The name without the plugin prefix.
      */
     protected function _getName($name)
@@ -164,13 +171,15 @@ class BakeTask extends Shell
             list($plugin, $name) = pluginSplit($name);
             $this->plugin = $this->params['plugin'] = $plugin;
         }
+
         return $name;
     }
 
     /**
-     * Delete empty file in a given path
+     * Delete empty file in a given path.
      *
      * @param string $path Path to folder which contains 'empty' file.
+     *
      * @return void
      */
     protected function _deleteEmptyFile($path)
@@ -196,26 +205,26 @@ class BakeTask extends Shell
         $bakeThemes = [];
         foreach (Plugin::loaded() as $plugin) {
             $path = Plugin::classPath($plugin);
-            if (is_dir($path . 'Template' . DS . 'Bake')) {
+            if (is_dir($path.'Template'.DS.'Bake')) {
                 $bakeThemes[] = $plugin;
             }
         }
 
         $parser->addOption('plugin', [
             'short' => 'p',
-            'help' => 'Plugin to bake into.'
+            'help'  => 'Plugin to bake into.',
         ])->addOption('force', [
-            'short' => 'f',
+            'short'   => 'f',
             'boolean' => true,
-            'help' => 'Force overwriting existing files without prompting.'
+            'help'    => 'Force overwriting existing files without prompting.',
         ])->addOption('connection', [
-            'short' => 'c',
+            'short'   => 'c',
             'default' => 'default',
-            'help' => 'The datasource connection to get data from.'
+            'help'    => 'The datasource connection to get data from.',
         ])->addOption('theme', [
-            'short' => 't',
-            'help' => 'The theme to use when baking code.',
-            'choices' => $bakeThemes
+            'short'   => 't',
+            'help'    => 'The theme to use when baking code.',
+            'choices' => $bakeThemes,
         ]);
 
         return $parser;

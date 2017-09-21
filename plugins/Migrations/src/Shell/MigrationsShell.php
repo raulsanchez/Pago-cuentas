@@ -1,14 +1,17 @@
 <?php
 /**
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Migrations\Shell;
 
 use Cake\Console\Shell;
@@ -21,11 +24,10 @@ use Migrations\MigrationsDispatcher;
  */
 class MigrationsShell extends Shell
 {
-
     /**
      * Defines what options can be passed to the shell.
      * This is required becuase CakePHP validates the passed options
-     * and would complain if something not configured here is present
+     * and would complain if something not configured here is present.
      *
      * @return Cake\Console\ConsoleOptionParser
      */
@@ -39,7 +41,7 @@ class MigrationsShell extends Shell
     }
 
     /**
-     * Defines constants that are required by phinx to get running
+     * Defines constants that are required by phinx to get running.
      *
      * @return void
      */
@@ -67,9 +69,10 @@ class MigrationsShell extends Shell
     }
 
     /**
-     * Display the help in the correct format
+     * Display the help in the correct format.
      *
      * @param string $command The command to get help for.
+     *
      * @return void
      */
     protected function displayHelp($command)
@@ -79,7 +82,7 @@ class MigrationsShell extends Shell
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     // @codingStandardsIgnoreStart
     protected function _displayHelp($command)

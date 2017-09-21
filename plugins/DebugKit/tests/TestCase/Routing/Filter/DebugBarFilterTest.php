@@ -1,15 +1,18 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Test\Routing\Filter;
 
 use Cake\Core\Configure;
@@ -20,27 +23,25 @@ use Cake\Network\Request;
 use Cake\Network\Response;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
-use Cake\Utility\String;
 use DebugKit\Routing\Filter\DebugBarFilter;
 
 /**
- * Test the debug bar
+ * Test the debug bar.
  */
 class DebugBarFilterTest extends TestCase
 {
-
     /**
-     * Fixtures
+     * Fixtures.
      *
      * @var array
      */
     public $fixtures = [
         'plugin.debug_kit.requests',
-        'plugin.debug_kit.panels'
+        'plugin.debug_kit.panels',
     ];
 
     /**
-     * setup
+     * setup.
      *
      * @return void
      */
@@ -66,7 +67,7 @@ class DebugBarFilterTest extends TestCase
     }
 
     /**
-     * Test that beforeDispatch call initialize on each panel
+     * Test that beforeDispatch call initialize on each panel.
      *
      * @return void
      */
@@ -83,20 +84,20 @@ class DebugBarFilterTest extends TestCase
     }
 
     /**
-     * Test that afterDispatch ignores requestAction
+     * Test that afterDispatch ignores requestAction.
      *
      * @return void
      */
     public function testAfterDispatchIgnoreRequestAction()
     {
         $request = new Request([
-            'url' => '/articles',
-            'params' => ['plugin' => null, 'requested' => 1]
+            'url'    => '/articles',
+            'params' => ['plugin' => null, 'requested' => 1],
         ]);
         $response = new Response([
             'statusCode' => 200,
-            'type' => 'text/html',
-            'body' => '<html><title>test</title><body><p>some text</p></body>'
+            'type'       => 'text/html',
+            'body'       => '<html><title>test</title><body><p>some text</p></body>',
         ]);
 
         $bar = new DebugBarFilter($this->events, []);
@@ -113,13 +114,13 @@ class DebugBarFilterTest extends TestCase
     public function testAfterDispatchSavesData()
     {
         $request = new Request([
-            'url' => '/articles',
-            'environment' => ['REQUEST_METHOD' => 'GET']
+            'url'         => '/articles',
+            'environment' => ['REQUEST_METHOD' => 'GET'],
         ]);
         $response = new Response([
             'statusCode' => 200,
-            'type' => 'text/html',
-            'body' => '<html><title>test</title><body><p>some text</p></body>'
+            'type'       => 'text/html',
+            'body'       => '<html><title>test</title><body><p>some text</p></body>',
         ]);
 
         $bar = new DebugBarFilter($this->events, []);
@@ -146,16 +147,16 @@ class DebugBarFilterTest extends TestCase
         $this->assertNotEmpty($result->panels[7]->summary);
         $this->assertEquals('Sql Log', $result->panels[7]->title);
 
-        $expected = '<html><title>test</title><body><p>some text</p>' .
-            "<script>var __debug_kit_id = '" . $result->id . "', " .
-            "__debug_kit_base_url = 'http://localhost/';</script>" .
-            '<script src="/debug_kit/js/toolbar.js"></script>' .
+        $expected = '<html><title>test</title><body><p>some text</p>'.
+            "<script>var __debug_kit_id = '".$result->id."', ".
+            "__debug_kit_base_url = 'http://localhost/';</script>".
+            '<script src="/debug_kit/js/toolbar.js"></script>'.
             '</body>';
         $this->assertTextEquals($expected, $response->body());
     }
 
     /**
-     * Test that afterDispatch does not modify response
+     * Test that afterDispatch does not modify response.
      *
      * @return void
      */
@@ -165,8 +166,8 @@ class DebugBarFilterTest extends TestCase
 
         $response = new Response([
             'statusCode' => 200,
-            'type' => 'application/json',
-            'body' => '{"some":"json"}'
+            'type'       => 'application/json',
+            'body'       => '{"some":"json"}',
         ]);
 
         $bar = new DebugBarFilter($this->events, []);
@@ -216,7 +217,7 @@ class DebugBarFilterTest extends TestCase
         $bar = new DebugBarFilter($this->events, [
             'forceEnable' => function () {
                 return true;
-            }
+            },
         ]);
         $this->assertTrue($bar->isEnabled(), 'debug is off, panel is forced on');
     }

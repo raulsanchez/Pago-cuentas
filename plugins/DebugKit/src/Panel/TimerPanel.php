@@ -1,15 +1,18 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org).
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
  * @link          http://cakephp.org CakePHP(tm) Project
+ *
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace DebugKit\Panel;
 
 use Cake\Controller\Controller;
@@ -23,7 +26,6 @@ use DebugKit\DebugTimer;
  */
 class TimerPanel extends DebugPanel
 {
-
     /**
      * Return an array of events to listen to.
      *
@@ -43,8 +45,8 @@ class TimerPanel extends DebugPanel
         };
         $both = function ($name) use ($before, $after) {
             return [
-                ['priority' => 0, 'callable' => $before('Event: ' . $name)],
-                ['priority' => 999, 'callable' => $after('Event: ' . $name)]
+                ['priority' => 0, 'callable' => $before('Event: '.$name)],
+                ['priority' => 999, 'callable' => $after('Event: '.$name)],
             ];
         };
 
@@ -54,7 +56,7 @@ class TimerPanel extends DebugPanel
                     DebugMemory::record(__d('debug_kit', 'Controller initialization'));
                 }],
                 ['priority' => 0, 'callable' => $before('Event: Controller.initialize')],
-                ['priority' => 999, 'callable' => $after('Event: Controller.initialize')]
+                ['priority' => 999, 'callable' => $after('Event: Controller.initialize')],
             ],
             'Controller.startup' => [
                 ['priority' => 0, 'callable' => $before('Event: Controller.startup')],
@@ -75,10 +77,10 @@ class TimerPanel extends DebugPanel
                     DebugTimer::start(__d('debug_kit', 'View Render start'));
                 }],
             ],
-            'View.beforeRender' => $both('View.beforeRender'),
-            'View.afterRender' => $both('View.afterRender'),
-            'View.beforeLayout' => $both('View.beforeLayout'),
-            'View.afterLayout' => $both('View.afterLayout'),
+            'View.beforeRender'     => $both('View.beforeRender'),
+            'View.afterRender'      => $both('View.afterRender'),
+            'View.beforeLayout'     => $both('View.beforeLayout'),
+            'View.afterLayout'      => $both('View.afterLayout'),
             'View.beforeRenderFile' => [
                 ['priority' => 0, 'callable' => function ($event, $filename) {
                     DebugTimer::start(__d('debug_kit', 'Render {0}', $filename));
@@ -109,9 +111,9 @@ class TimerPanel extends DebugPanel
     {
         return [
             'requestTime' => DebugTimer::requestTime(),
-            'timers' => DebugTimer::getAll(),
-            'memory' => DebugMemory::getAll(),
-            'peakMemory' => DebugMemory::getPeak(),
+            'timers'      => DebugTimer::getAll(),
+            'memory'      => DebugMemory::getAll(),
+            'peakMemory'  => DebugMemory::getPeak(),
         ];
     }
 
@@ -124,6 +126,7 @@ class TimerPanel extends DebugPanel
     {
         $time = Number::precision(DebugTimer::requestTime(), 2);
         $memory = Number::toReadableSize(DebugMemory::getPeak());
+
         return "$time s - $memory";
     }
 }
